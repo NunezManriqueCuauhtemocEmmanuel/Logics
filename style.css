@@ -91,6 +91,10 @@ h2 {
 }
   
 .datos {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     width: 100%; /* Opcional: ajusta al ancho deseado */
     font-family: "Glory", serif; 
@@ -99,17 +103,30 @@ h2 {
     font-weight: normal;
     font-size: 40px;
 }
-  
+
+.datos .texto{
+    width: 65%;
+}
+
 .datos p{
     font-weight: normal;
     font-size: 24px;
-    margin: 50px 100px;
 }
 
 .datos .logics{
     font-size: 24px;
     font-weight: bold;
     color: rgb(16, 27, 48);
+}
+
+.funciones {
+    text-align: center;
+    width: 100%; /* Opcional: ajusta al ancho deseado */
+    font-family: "Glory", serif; 
+}
+.funciones h1{
+    font-weight: normal;
+    font-size: 40px;
 }
 
 @media (max-width: 1210px) {
