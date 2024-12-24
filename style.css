@@ -97,17 +97,17 @@ h2 {
 }
 .datos h1{
     font-weight: normal;
-    font-size: 48px;
+    font-size: 40px;
 }
   
 .datos p{
     font-weight: normal;
-    font-size: 28px;
+    font-size: 24px;
     margin: 50px 100px;
 }
 
 .datos .logics{
-    font-size: 28px;
+    font-size: 24px;
     font-weight: bold;
 }
 
