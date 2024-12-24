@@ -136,6 +136,11 @@ h2 {
     gap: 0px;
 }
 .funciones .penta div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
     position: relative;
     margin: 0px -25px;
 	width: 342px;
@@ -146,6 +151,18 @@ h2 {
 
 .funciones .penta div:nth-child(3){
     background: #A1A7B5;
+    font-size: 30px;
+    color: white;
+    font-family: "Hammersmith One", serif;
+}
+
+.funciones .penta div:nth-child(3) img{
+    background: #A1A7B5;
+}
+.Log{
+    margin-top: 70px;
+    width: 100px;
+    fill: white;
 }
 
 .funciones .penta div:nth-child(2){
