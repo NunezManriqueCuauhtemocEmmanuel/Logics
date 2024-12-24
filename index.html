@@ -7,14 +7,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Glory:ital,wght@0,100..800;1,100..800&family=Hammersmith+One&display=swap" rel="stylesheet">
+  <script defer src="./js/animaciones.js"></script>
   <title>LogicS</title>
 </head>
 
 <body>
   <div class="wrapped">
-    <div class="logo">
+    <div class="logo hidden">
       <img src="./img/Logics.png">
-      <h2>LogicS</h2>
+      <h2 class="hidden">LogicS</h2>
     </div>
     <div class="box">
       <div></div>
@@ -24,8 +25,8 @@
     </div>
   </div>
   <div class="datos">
-    <h1>Bienvenidos</h1>
-    <div class="texto">
+    <h1 class="hidden">Bienvenidos</h1>
+    <div class="texto hidden" >
       <p>Esto es <a class="logics">LogicS</a>, esta es una aplicacion web didactica que te ayudara con problemas relacionados a circuitos logicos,
         pero que es lo que puedes encontrar aqui en <a class="logics">LogicS</a></p>
     </div>
@@ -34,14 +35,16 @@
   <div class="funciones">
     <h1>  Funciones  </h1>
     <div class="penta">
-      <div></div>
-      <div></div>
-      <div>
+      <div class="hidden"></div>
+      <div class="hidden">
+        <p>Simulador de circuitos logicos con base en variables</p>
+      </div>
+      <div class="hidden">
         <svg class="Log" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M0 80C0 53.5 21.5 32 48 32l96 0c26.5 0 48 21.5 48 48l0 16 192 0 0-16c0-26.5 21.5-48 48-48l96 0c26.5 0 48 21.5 48 48l0 96c0 26.5-21.5 48-48 48l-96 0c-26.5 0-48-21.5-48-48l0-16-192 0 0 16c0 1.7-.1 3.4-.3 5L272 288l96 0c26.5 0 48 21.5 48 48l0 96c0 26.5-21.5 48-48 48l-96 0c-26.5 0-48-21.5-48-48l0-96c0-1.7 .1-3.4 .3-5L144 224l-96 0c-26.5 0-48-21.5-48-48L0 80z"/></svg>
         <p>LogicS</p>
       </div>
-      <div></div>
-      <div></div>
+      <div class="hidden"></div>
+      <div class="hidden"></div>
     </div>
   </div>
 </body>

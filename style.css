@@ -152,6 +152,7 @@ h2 {
 
 .funciones .penta div:hover{
     transform: scale(1.1);
+    cursor: pointer;
 }
 
 .funciones .penta div:nth-child(3){
@@ -159,6 +160,7 @@ h2 {
     font-size: 30px;
     color: white;
     font-family: "Hammersmith One", serif;
+    transition-delay: 200ms;
 }
 
 .funciones .penta div:nth-child(3) img{
@@ -173,11 +175,29 @@ h2 {
 .funciones .penta div:nth-child(2){
     margin-top: 135px;
     rotate: 180deg;
+    transition-delay: 300ms;
+}
+.funciones .penta div:nth-child(2) p{
+    font-family: "Glory", serif; 
+    font-size: 20px;
+    margin-top: 135px;
+    rotate: 180deg;
+    transition-delay: 300ms;
+    margin: 70px;
 }
 
 .funciones .penta div:nth-child(4){
     margin-top: 135px;
     rotate: 180deg;
+    transition-delay: 300ms;
+}
+
+.funciones .penta div:nth-child(1){
+    transition-delay: 500ms;
+}
+
+.funciones .penta div:nth-child(5){
+    transition-delay: 500ms;
 }
 
 @media (max-width: 1532px){
@@ -257,4 +277,17 @@ h2 {
         flex-direction: column;
         justify-content: center;
     }
+}
+
+.hidden{
+    opacity: 0;
+    transition: all 1s;
+    filter: blur(5px);
+    transform: scale(0);
+}
+.show{
+    opacity: 1;
+    transition: all 1s;
+    filter: blur(0px);
+    transform: scale(1);
 }
