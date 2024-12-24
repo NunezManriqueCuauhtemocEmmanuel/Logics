@@ -142,11 +142,16 @@ h2 {
     flex-direction: column;
     text-align: center;
     position: relative;
-    margin: 0px -25px;
+    margin: 0px -23px;
 	width: 342px;
 	height: 344px;
 	background: #ffffff;
 	clip-path: polygon( 50% 0, 100% 38%, 81% 100%, 19% 100%, 0 38%);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.funciones .penta div:hover{
+    transform: scale(1.1);
 }
 
 .funciones .penta div:nth-child(3){
@@ -175,6 +180,41 @@ h2 {
     rotate: 180deg;
 }
 
+@media (max-width: 1532px){
+    .funciones .penta{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 0px;
+    }
+
+    .funciones .penta div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        position: relative;
+        margin: 25px;
+        width: 342px;
+        height: 344px;
+        background: #ffffff;
+        clip-path: polygon( 50% 0, 100% 38%, 81% 100%, 19% 100%, 0 38%);
+    }
+
+    .funciones .penta div:nth-child(2){
+        rotate: 0deg;
+        margin: 25px;
+    }
+    
+    .funciones .penta div:nth-child(4){
+        rotate: 0deg;
+        margin: 25px;
+    }
+    
+}
+
 @media (max-width: 1210px) {
     logo img {
         height: 0;
@@ -195,7 +235,6 @@ h2 {
         font-size: 24px;
         text-align: justify;
     }
-    
 }
 
 @media (max-width: 404px) {
