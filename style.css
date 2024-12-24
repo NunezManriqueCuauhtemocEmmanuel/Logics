@@ -123,6 +123,7 @@ h2 {
     text-align: center;
     width: 100%; /* Opcional: ajusta al ancho deseado */
     font-family: "Glory", serif; 
+    margin-top: 100px;
 }
 .funciones h1{
     font-weight: normal;
@@ -272,6 +273,22 @@ h2 {
         margin: 25px;
     }
     
+    .funciones .penta div:nth-child(2) p{
+        font-family: "Glory", serif; 
+        font-size: 20px;
+        rotate: 0deg;
+        transition-delay: 300ms;
+        margin: 50px 70px 2px 70px;
+    }
+
+    .funciones .penta div:nth-child(4) p{
+        font-family: "Glory", serif; 
+        font-size: 20px;
+        rotate: 0deg;
+        transition-delay: 300ms;
+        margin: 50px 70px 2px 70px;
+    }
+
 }
 
 @media (max-width: 1210px) {
