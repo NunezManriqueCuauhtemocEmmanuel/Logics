@@ -127,6 +127,35 @@ h2 {
 .funciones h1{
     font-weight: normal;
     font-size: 40px;
+    text-decoration: underline;
+}
+
+.funciones .penta{
+    display: flex;
+    justify-content: center;
+    gap: 0px;
+}
+.funciones .penta div{
+    position: relative;
+    margin: 0px -25px;
+	width: 342px;
+	height: 344px;
+	background: #ffffff;
+	clip-path: polygon( 50% 0, 100% 38%, 81% 100%, 19% 100%, 0 38%);
+}
+
+.funciones .penta div:nth-child(3){
+    background: #A1A7B5;
+}
+
+.funciones .penta div:nth-child(2){
+    margin-top: 135px;
+    rotate: 180deg;
+}
+
+.funciones .penta div:nth-child(4){
+    margin-top: 135px;
+    rotate: 180deg;
 }
 
 @media (max-width: 1210px) {
