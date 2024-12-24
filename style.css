@@ -109,6 +109,7 @@ h2 {
 .datos .logics{
     font-size: 24px;
     font-weight: bold;
+    color: rgb(16, 27, 48);
 }
 
 @media (max-width: 1210px) {
