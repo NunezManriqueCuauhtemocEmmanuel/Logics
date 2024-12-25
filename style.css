@@ -50,10 +50,23 @@ body {
     height: 7px;
     border-radius: 50%;
     background: #1E3A59;;
+    animation: bounceInUp;
+    animation-duration: 2s;
 }
+
+.header .centro i{
+    margin-top: 5px;
+    color: #1E3A59;
+    animation: bounce;
+    animation-duration: 1s;
+    animation-delay: 0.9s;
+}
+
 .header .centro p{
     margin-top: 5px;
     color: #436fa0;
+    animation: zoomInDown;
+    animation-duration: 3s;
 }
 
 .header .busqueda{
