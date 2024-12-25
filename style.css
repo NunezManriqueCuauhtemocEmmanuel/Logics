@@ -66,7 +66,7 @@ body {
     margin-top: 5px;
     color: #436fa0;
     animation: zoomInDown;
-    animation-duration: 3s;
+    animation-duration: 3.3s;
 }
 
 .header .busqueda{
@@ -105,7 +105,7 @@ nav .nav-content{
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    
+    transition: all 1s;
 }
 
 .nav-content .toggle-btn{
@@ -115,6 +115,10 @@ nav .nav-content{
     transform: rotate(45deg);
     background: linear-gradient(to left, #1A284B, #233D80);
     color: white;
+}
+
+nav.open .nav-content .toggle-btn{
+    transform: rotate(-45deg);
 }
 
 nav.open .nav-content span{
@@ -157,6 +161,7 @@ nav.open .nav-content span{
     background: linear-gradient(to left, #1A284B, #233D80);
 }
 
+/*Logo*/
 
 .wrapped {
     width: 100%;
@@ -247,7 +252,9 @@ h2 {
       opacity: 0;
     }
 }
-  
+
+/*Bienvenida*/
+
 .datos {
     display: flex;
     justify-content: center;
@@ -303,9 +310,9 @@ h2 {
     flex-direction: column;
     text-align: center;
     position: relative;
-    margin: 0px -23px;
-	width: 342px;
-	height: 344px;
+    margin: 0px -20px;
+	width: 272px;
+	height: 276px;
 	background: #ffffff;
 	clip-path: polygon( 50% 0, 100% 38%, 81% 100%, 19% 100%, 0 38%);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -332,7 +339,7 @@ h2 {
 
 
 .funciones .penta div:nth-child(2){
-    margin-top: 135px;
+    margin-top: 110px;
     rotate: 180deg;
     transition-delay: 300ms;
 }
@@ -351,7 +358,7 @@ h2 {
 }
 
 .funciones .penta div:nth-child(4){
-    margin-top: 135px;
+    margin-top: 110px;
     rotate: 180deg;
     transition-delay: 300ms;
 }
@@ -408,9 +415,13 @@ h2 {
 
 .desarrollo{
     text-align: center;
-    width: 100%; /* Opcional: ajusta al ancho deseado */
+    width: 100%;
     font-family: "Glory", serif; 
     margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .desarrollo h1{
@@ -419,6 +430,38 @@ h2 {
     text-decoration: underline;
 }
 
+.create{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.create div{
+    width: 40%;
+}
+.create .nombre{
+    text-align: justify;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0px 100px 100px 0px;
+}
+
+.create .nombre  p{
+    text-align: center;
+    margin: 50px;
+    width: 50%;
+}
+
+.create .bola{
+    margin: 5px;
+    width: 32vh;
+    height: 32vh;
+    background: #2E405A;
+    border-radius: 1000px;
+}
 
 /*Animaciones*/
 
@@ -493,6 +536,69 @@ h2 {
         font-size: 24px;
         text-align: justify;
     }
+    .create{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .create div{
+        width: 60%;
+    }
+    .create .nombre{
+        position: relative;
+        text-align: justify;
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50px;
+        margin-bottom: 10px;
+    }
+    .create .nombre  p{
+        text-align: justify;
+        margin: 30px;
+        width: 100%;
+        font-size: 12px;
+    }
+    
+}
+
+@media (max-width: 935px){
+    .header{
+        opacity: 0;
+    }
+
+    nav{
+        z-index: 100;
+        position: fixed;
+        top: 10%;
+        right: 43%;
+        cursor: pointer;
+        transform: rotate(-45deg);
+    }
+
+    .nav-content .toggle-btn{
+        font-size: 30px;
+        z-index: 101;
+        cursor: pointer;
+        transform: rotate(-45deg);
+        background: linear-gradient(to left, #1A284B, #233D80);
+        color: white;
+    }
+    
+    nav.open .nav-content .toggle-btn{
+        transform: rotate(-45deg);
+    }
+    
+    nav.open .nav-content span{
+        transition: all 1s;
+        transform: rotate(calc(var(--i) * (360deg/8))) translateX(100px);
+    }
+    
+    .nav-content span a{
+        text-decoration: none;
+        transform: rotate(45deg);
+    }
 }
 
 @media (max-width: 404px) {
@@ -529,3 +635,5 @@ h2 {
     filter: blur(0px);
     transform: scale(1);
 }
+
+
