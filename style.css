@@ -753,7 +753,8 @@ h2 {
     animation-timeline: --nombre;
     animation-name: deslizar;
 
-    animation-range: entry 25% cover 30%; 
+    animation-range: entry 15% cover 30%; 
+    animation-fill-mode: both;
 }
 
 .lateral{
@@ -763,5 +764,6 @@ h2 {
     animation-timeline: --lateral;
     animation-name: deslizarD;
 
-    animation-range: entry 25% cover 30%; 
+    animation-range: entry 15% cover 30%; 
+    animation-fill-mode: both;
 }
