@@ -266,7 +266,8 @@ h2 {
 }
 .datos h1{
     font-weight: normal;
-    font-size: 40px;
+    font-size: 64px;
+    font-weight: 200;
 }
 
 .datos .texto{
@@ -302,6 +303,7 @@ h2 {
     display: flex;
     justify-content: center;
     gap: 0px;
+    filter: drop-shadow(-5px 5px 10px rgba(0, 0, 0, 0.329));
 }
 .funciones .penta div{
     display: flex;
@@ -318,10 +320,6 @@ h2 {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.funciones .penta div:hover{
-    transform: scale(1.1);
-    cursor: pointer;
-}
 
 .funciones .penta div:nth-child(3){
     background: #A1A7B5;
@@ -351,8 +349,7 @@ h2 {
     transition-delay: 300ms;
     margin: 50px 70px 2px 70px;
 }
-.funciones .penta div:nth-child(2) .Log{
-    width: 100px;
+.funciones .penta div:nth-child(2) i{
     fill: rgb(19, 34, 56);
     margin: 15px;
 }
@@ -371,8 +368,7 @@ h2 {
     transition-delay: 300ms;
     margin: 50px 70px 2px 70px;
 }
-.funciones .penta div:nth-child(4) .Log{
-    width: 100px;
+.funciones .penta div:nth-child(4) i{
     fill: rgb(19, 34, 56);
     margin: 15px;
 }
@@ -388,8 +384,7 @@ h2 {
     transition-delay: 300ms;
     margin: 10px 70px 50px 70px;
 }
-.funciones .penta div:nth-child(1) .Log{
-    width: 100px;
+.funciones .penta div:nth-child(1) i{
     fill: rgb(19, 34, 56);
     margin: 70px 70px 10px 70px;
 }
@@ -405,10 +400,14 @@ h2 {
     transition-delay: 300ms;
     margin: 10px 70px 50px 70px;
 }
-.funciones .penta div:nth-child(5) .Log{
-    width: 100px;
+.funciones .penta div:nth-child(5) i{
     fill: rgb(19, 34, 56);
     margin: 70px 70px 10px 70px;
+}
+
+.funciones .penta div i{
+    font-size: 50px;
+    color: #1E3A59;
 }
 
 /*Desarrollo*/
@@ -442,25 +441,94 @@ h2 {
 }
 .create .nombre{
     text-align: justify;
-    background: white;
+    background: rgb(29, 31, 68);
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 0px 100px 100px 0px;
+    filter: drop-shadow(-5px 5px 10px rgba(0, 0, 0, 0.329));
 }
 
 .create .nombre  p{
     text-align: center;
     margin: 50px;
     width: 50%;
+    color: white;
 }
 
 .create .bola{
     margin: 5px;
     width: 32vh;
     height: 32vh;
-    background: #2E405A;
+    background: #ffffff;
     border-radius: 1000px;
+    transition: all 0.5s;
+    filter: drop-shadow(-10px 10px 20px rgba(0, 0, 0, 0.486));
+}
+
+.create .lateral{
+    text-align: justify;
+    background: rgb(29, 31, 68);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 100px 0px 0px 100px;
+    filter: drop-shadow(-5px 5px 10px rgba(0, 0, 0, 0.329));
+}
+
+.create .lateral  p{
+    text-align: center;
+    margin-top: 50px;
+    width: 50%;
+    color: white;
+}
+
+.lenguajes{
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.lenguajes i{
+    font-size: 50px;
+    transition: all 1s;
+    cursor: pointer;
+}
+
+.lenguajes i:hover{
+    transform: scale(1.2);
+}
+
+.lenguajes i:nth-child(1){
+    color: orangered;
+}
+
+.lenguajes i:nth-child(2){
+    color: rgb(0, 119, 255);
+}
+
+.lenguajes i:nth-child(3){
+    color: rgb(247, 205, 19);
+}
+
+/*Acerca de*/
+.acerca{
+    text-align: center;
+    width: 100%;
+    font-family: "Glory", serif; 
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.acerca h1{
+    font-weight: normal;
+    font-size: 40px;
+    text-decoration: underline;
 }
 
 /*Animaciones*/
@@ -544,21 +612,35 @@ h2 {
     .create div{
         width: 60%;
     }
-    .create .nombre{
+    .create .nombre,
+    .create .lateral{
         position: relative;
         text-align: justify;
-        background: white;
         display: flex;
         justify-content: center;
         align-items: center;
         border-radius: 50px;
         margin-bottom: 10px;
+        margin-top: 10px;
     }
     .create .nombre  p{
         text-align: justify;
         margin: 30px;
         width: 100%;
         font-size: 12px;
+    }
+
+    .create .lateral  p{
+        text-align: center;
+        margin-top: 20px;
+        width: 50%;
+    }
+    
+    .lenguajes{
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
     }
     
 }
@@ -623,6 +705,8 @@ h2 {
     }
 }
 
+/*Animaciones*/
+
 .hidden{
     opacity: 0;
     transition: all 1s;
@@ -636,4 +720,48 @@ h2 {
     transform: scale(1);
 }
 
+@keyframes deslizar{
+    from{
+        opacity: 0;
+        transform: translateX(-200px);
+    }
+    
+    to{
+        opacity: 1;
+        transform: translateX(0px);
+    }
 
+}
+
+@keyframes deslizarD{
+    from{
+        opacity: 0;
+        transform: translate(100px);
+    }
+    
+    to{
+        opacity: 1;
+        transform: translateX(0px);
+    }
+
+}
+
+.nombre{
+    view-timeline-name: --nombre;
+    view-timeline-axis: block;
+
+    animation-timeline: --nombre;
+    animation-name: deslizar;
+
+    animation-range: entry 25% cover 30%; 
+}
+
+.lateral{
+    view-timeline-name: --lateral;
+    view-timeline-axis: block;
+
+    animation-timeline: --lateral;
+    animation-name: deslizarD;
+
+    animation-range: entry 25% cover 30%; 
+}
