@@ -2,6 +2,31 @@ body {
     margin: 0;
     padding: 0;
     background: #EAECEE;
+    box-sizing: border-box;
+}
+
+nav{
+    z-index: 100;
+    position: absolute;
+    top: 20px;
+    right: 300px;
+    cursor: grab;
+}
+
+nav .nav-content{
+    
+}
+
+.nav-content .boton,
+.nav-content span a{
+    height: 60px;
+    width: 60px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.39);
 }
   
 .wrapped {
@@ -25,6 +50,9 @@ body {
     height: 10vw;
     min-height: 100px;
     filter: drop-shadow(-5px 5px 3px rgba(0, 0, 0, 0.5));
+    animation: bounce; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s; /* don't forget to set a duration! */
+    margin-right: -22px;
 }
   
 h2 {
@@ -34,7 +62,8 @@ h2 {
     color: black;
     text-shadow: -5px 5px 5px rgba(0, 0, 0, 0.39);
     margin: 0;
-  
+    animation: bounce; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s; /* don't forget to set a duration! */
 } 
 .box {
     width: 100%;
@@ -119,6 +148,8 @@ h2 {
     color: rgb(16, 27, 48);
 }
 
+/*Funciones*/
+
 .funciones {
     text-align: center;
     width: 100%; /* Opcional: ajusta al ancho deseado */
@@ -178,6 +209,7 @@ h2 {
 }
 .funciones .penta div:nth-child(2) p{
     font-family: "Glory", serif; 
+    font-weight: light;
     font-size: 20px;
     rotate: 180deg;
     transition-delay: 300ms;
@@ -197,6 +229,7 @@ h2 {
 
 .funciones .penta div:nth-child(4) p{
     font-family: "Glory", serif; 
+    font-weight: light;
     font-size: 20px;
     rotate: 180deg;
     transition-delay: 300ms;
@@ -214,6 +247,7 @@ h2 {
 
 .funciones .penta div:nth-child(1) p{
     font-family: "Glory", serif; 
+    font-weight: light;
     font-size: 20px;
     transition-delay: 300ms;
     margin: 10px 70px 50px 70px;
@@ -230,6 +264,7 @@ h2 {
 
 .funciones .penta div:nth-child(5) p{
     font-family: "Glory", serif; 
+    font-weight: light;
     font-size: 20px;
     transition-delay: 300ms;
     margin: 10px 70px 50px 70px;
@@ -239,6 +274,24 @@ h2 {
     fill: rgb(19, 34, 56);
     margin: 70px 70px 10px 70px;
 }
+
+/*Desarrollo*/
+
+.desarrollo{
+    text-align: center;
+    width: 100%; /* Opcional: ajusta al ancho deseado */
+    font-family: "Glory", serif; 
+    margin-top: 100px;
+}
+
+.desarrollo h1{
+    font-weight: normal;
+    font-size: 40px;
+    text-decoration: underline;
+}
+
+
+/*Animaciones*/
 
 @media (max-width: 1532px){
     .funciones .penta{
