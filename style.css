@@ -3,6 +3,7 @@ body {
     padding: 0;
     background: #EAECEE;
     box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 /*Header*/
@@ -464,6 +465,15 @@ h2 {
     border-radius: 1000px;
     transition: all 0.5s;
     filter: drop-shadow(-10px 10px 20px rgba(0, 0, 0, 0.486));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bola i{
+    font-size: 100px;
+    color: #A1A7B5;
+    filter: drop-shadow(-5px 5px 3px rgba(168, 168, 168, 0.486));
 }
 
 .create .lateral{
@@ -492,8 +502,9 @@ h2 {
 }
 
 .lenguajes i{
+    color: #213146;
     font-size: 50px;
-    transition: all 1s;
+    transition: all 800ms;
     cursor: pointer;
 }
 
@@ -501,15 +512,15 @@ h2 {
     transform: scale(1.2);
 }
 
-.lenguajes i:nth-child(1){
+.lenguajes i:nth-child(1):hover{
     color: orangered;
 }
 
-.lenguajes i:nth-child(2){
+.lenguajes i:nth-child(2):hover{
     color: rgb(0, 119, 255);
 }
 
-.lenguajes i:nth-child(3){
+.lenguajes i:nth-child(3):hover{
     color: rgb(247, 205, 19);
 }
 
@@ -736,7 +747,7 @@ h2 {
 @keyframes deslizarD{
     from{
         opacity: 0;
-        transform: translate(100px);
+        transform: translateX(100px);
     }
     
     to{
