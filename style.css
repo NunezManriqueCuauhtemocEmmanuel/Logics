@@ -7,17 +7,20 @@ body {
 
 nav{
     z-index: 100;
-    position: absolute;
-    top: 20px;
-    right: 300px;
-    cursor: grab;
+    position: fixed;
+    top: 45%;
+    right: 30px;
+    cursor: pointer;
+    transform: rotate(-45deg);
 }
 
 nav .nav-content{
-    
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.nav-content .boton,
+.nav-content .toggle-btn,
 .nav-content span a{
     height: 60px;
     width: 60px;
@@ -26,9 +29,40 @@ nav .nav-content{
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.39);
+    
 }
-  
+
+.nav-content .toggle-btn{
+    font-size: 35px;
+    z-index: 101;
+    cursor: pointer;
+    transform: rotate(45deg);
+    background: linear-gradient(to left, #1A284B, #233D80);
+    color: white;
+}
+
+nav.open .nav-content span{
+    transition: all 1s;
+    transform: rotate(calc(var(--i) * (360deg/8))) translateY(100px);
+}
+
+.nav-content span{
+    transition: all 1s;
+    position: absolute;
+}
+
+.nav-content span a{
+    text-decoration: none;
+    transform: rotate(45deg);
+}
+
+.nav-content span a i{
+    color: #1A284B;
+    font-size: 24px;
+    transform: rotate(calc(var(--i) * (360deg/-8)))
+}
+
+
 .wrapped {
     width: 100%;
     min-height: 100vh; /* Asegura que ocupe al menos toda la pantalla */
