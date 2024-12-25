@@ -5,6 +5,70 @@ body {
     box-sizing: border-box;
 }
 
+/*Header*/
+
+.header{
+    z-index: 2;
+    background: #EAECEE;
+    width: 100vw;
+    padding: 10px;
+    font-family: "Glory", serif; 
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    margin-top: 0px;
+    font-size: 18px;
+}
+
+.header .fecha{
+    width: 30vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header .fecha i{
+    margin-left: 15px;
+    color: #1E3A59;
+}
+.header .fecha p{
+    font-weight: lighter;
+    margin-left: 15px;
+}
+
+.header .centro{
+    margin-top: 10px;
+    width: 30vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #1E3A59;
+}
+.header .centro .circulo{
+    margin-top: 5px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #1E3A59;;
+}
+.header .centro p{
+    margin-top: 5px;
+    color: #436fa0;
+}
+
+.header .busqueda{
+    width: 30vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1E3A59;
+}
+.header .busqueda p{
+    margin-left: 10px;
+    font-weight: lighter;
+}
+/*Navbar*/
+
 nav{
     z-index: 100;
     position: fixed;
@@ -24,7 +88,6 @@ nav .nav-content{
 .nav-content span a{
     height: 60px;
     width: 60px;
-    background: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -33,7 +96,7 @@ nav .nav-content{
 }
 
 .nav-content .toggle-btn{
-    font-size: 35px;
+    font-size: 30px;
     z-index: 101;
     cursor: pointer;
     transform: rotate(45deg);
@@ -60,6 +123,25 @@ nav.open .nav-content span{
     color: #1A284B;
     font-size: 24px;
     transform: rotate(calc(var(--i) * (360deg/-8)))
+}
+
+.nav-content span a img{
+    width: 32px;
+    transform: rotate(calc(var(--i) * (360deg/-8)))
+}
+
+.nav-content span:nth-child(1),
+.nav-content span:nth-child(2),
+.nav-content span:nth-child(3),
+.nav-content span:nth-child(5),
+.nav-content span:nth-child(6){
+    border-radius: 50%;
+    background: #fff;
+}
+
+.nav-content span:nth-child(4){
+    border-radius: 50%;
+    background: linear-gradient(to left, #1A284B, #233D80);
 }
 
 
