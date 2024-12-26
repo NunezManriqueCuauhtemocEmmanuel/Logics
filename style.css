@@ -507,10 +507,11 @@ h2 {
 }
 
 .lenguajes i{
-    color: #213146;
+    color: #1a2349;
     font-size: 50px;
     transition: all 800ms;
-     cursor: url('./img/mano.png'), auto;
+    cursor: url('./img/mano.png'), auto;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
 }
 
 .lenguajes i:hover{
@@ -522,7 +523,7 @@ h2 {
 }
 
 .lenguajes i:nth-child(2):hover{
-    color: rgb(0, 119, 255);
+    color: #254bdc;
 }
 
 .lenguajes i:nth-child(3):hover{
@@ -545,6 +546,19 @@ h2 {
     font-weight: normal;
     font-size: 40px;
     text-decoration: underline;
+}
+
+.acerca .dispositivos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #222222;
+    width: 100vw;
+    height: 70vh;
+}
+.dispositivos svg{
+    top: 0px;
 }
 
 /*Animaciones*/
