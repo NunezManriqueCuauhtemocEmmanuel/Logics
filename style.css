@@ -613,8 +613,10 @@ h2 {
 
 .navegadores i{
     font-size: 40px;
-    color: #151515;
+    color: #2e2e2e;
     transition: all 1s;
+    text-shadow: 0px 5px 7px rgba(0, 0, 0, 0.2),
+    0px 5px 12px rgba(0, 0, 0, 0.4);
 }
 
 
