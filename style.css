@@ -582,6 +582,10 @@ h2 {
     text-decoration: none;
 }
 
+.lema{
+    margin: 20px;
+}
+
 .lema span{
     font-family: "Hammersmith One", serif;
     color: #72b4ff;
@@ -592,14 +596,14 @@ h2 {
     font-weight: 200;
     color: #72b4ff;
     transition-delay: 800ms;
-    margin: 0px 50px;
+    margin: 10px 50px;
 }
 
 .cubos{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    margin: 10px 20px 50px 20px;
+    margin: 5px 20px 50px 20px;
     height: 70%;
     flex-wrap: wrap;
     gap: 100px;
@@ -837,7 +841,11 @@ h2 {
 
 @media (max-width: 600px){
     .acerca .dispositivos{
+        padding-top: 100px;
         padding-bottom: 200px;
+    }
+    .lema p{
+        margin-bottom: 50px;
     }
 }
 
