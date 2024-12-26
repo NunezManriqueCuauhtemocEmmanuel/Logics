@@ -868,7 +868,7 @@ h2 {
 @keyframes deslizar{
     from{
         opacity: 0;
-        transform: translateX(-204000px);
+        transform: translateX(-200px);
     }
     
     to{
