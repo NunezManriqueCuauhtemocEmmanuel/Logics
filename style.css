@@ -587,6 +587,13 @@ h2 {
     color: #72b4ff;
 }
 
+.lema p{
+    font-family: "Glory", serif;
+    font-weight: 200;
+    color: #72b4ff;
+    transition-delay: 800ms;
+}
+
 .cubos{
     display: flex;
     justify-content: space-evenly;
