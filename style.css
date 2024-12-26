@@ -4,6 +4,7 @@ body {
     background: #EAECEE;
     box-sizing: border-box;
     overflow-x: hidden;
+    cursor: url('./img/punteroAzul.png'), auto;
 }
 
 /*Header*/
@@ -12,12 +13,11 @@ body {
     z-index: 2;
     background: #EAECEE;
     width: 100vw;
-    padding: 10px;
     font-family: "Glory", serif; 
     display: flex;
+    align-items: center;
     justify-content: space-around;
     position: fixed;
-    margin-top: 0px;
     font-size: 18px;
 }
 
@@ -88,7 +88,7 @@ nav{
     position: fixed;
     top: 45%;
     right: 30px;
-    cursor: pointer;
+     cursor: url('./img/mano.png'), auto;
     transform: rotate(-45deg);
 }
 
@@ -107,12 +107,13 @@ nav .nav-content{
     justify-content: center;
     border-radius: 50%;
     transition: all 1s;
+    cursor: url('./img/mano.png'), auto;
 }
 
 .nav-content .toggle-btn{
     font-size: 30px;
     z-index: 101;
-    cursor: pointer;
+     cursor: url('./img/mano.png'), auto;
     transform: rotate(45deg);
     background: linear-gradient(to left, #1A284B, #233D80);
     color: white;
@@ -470,6 +471,10 @@ h2 {
     align-items: center;
 }
 
+.create .bola:hover{
+    transform: scale(1.1);
+}
+
 .bola i{
     font-size: 100px;
     color: #A1A7B5;
@@ -505,7 +510,7 @@ h2 {
     color: #213146;
     font-size: 50px;
     transition: all 800ms;
-    cursor: pointer;
+     cursor: url('./img/mano.png'), auto;
 }
 
 .lenguajes i:hover{
@@ -657,7 +662,8 @@ h2 {
 }
 
 @media (max-width: 935px){
-    .header{
+    .header .fecha,
+    .header .busqueda{
         opacity: 0;
     }
 
@@ -665,22 +671,22 @@ h2 {
         z-index: 100;
         position: fixed;
         top: 10%;
-        right: 43%;
-        cursor: pointer;
+        right: 42.5%;
+         cursor: url('./img/mano.png'), auto;
         transform: rotate(-45deg);
     }
 
     .nav-content .toggle-btn{
         font-size: 30px;
         z-index: 101;
-        cursor: pointer;
+         cursor: url('./img/mano.png'), auto;
         transform: rotate(-45deg);
         background: linear-gradient(to left, #1A284B, #233D80);
         color: white;
     }
     
     nav.open .nav-content .toggle-btn{
-        transform: rotate(-45deg);
+        transform: rotate(-135deg);
     }
     
     nav.open .nav-content span{
