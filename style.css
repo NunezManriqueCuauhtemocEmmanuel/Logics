@@ -354,6 +354,7 @@ h2 {
 .funciones .penta div:nth-child(2) i{
     fill: rgb(19, 34, 56);
     margin: 15px;
+    rotate: 180deg;
 }
 
 .funciones .penta div:nth-child(4){
@@ -572,7 +573,6 @@ h2 {
     background: #222222;
     width: 100vw;
     min-height: 100vh;
-    animation: colorChange 4s linear infinite;
 }
 
 .dispositivos h1{
@@ -589,6 +589,7 @@ h2 {
 .lema span{
     font-family: "Hammersmith One", serif;
     color: #72b4ff;
+    animation: colorChange 12s linear infinite;
 }
 
 .lema p{
@@ -597,9 +598,61 @@ h2 {
     color: #72b4ff;
     transition-delay: 800ms;
     margin: 10px 50px;
+    animation: colorChange 12s linear infinite;
 }
 
+.navegadores{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 50px;
+    gap: 10px;
+}
+
+.navegadores i{
+    font-size: 40px;
+    color: #151515;
+    transition: all 1s;
+}
+
+
+.navegadores i:hover{
+    transform: scale(1.2);
+}
+
+.navegadores i:nth-child(1):hover{
+    color: #559ce2;
+    transform: scale(1.1);
+    animation: colorChange 12s linear infinite;
+}
+.navegadores i:nth-child(2):hover{
+    color: #24cc49;
+    transform: scale(1.1);
+    animation: colorChange 12s linear infinite;
+}
+.navegadores i:nth-child(3):hover{
+    color: #1db5e7;
+}
+.navegadores i:nth-child(4):hover{
+    color: #e7781d;
+}
+.navegadores i:nth-child(5):hover{
+    color: #22a2eb;
+}
+
+.navegadores i:nth-child(6):hover{
+    color: #d21e27;
+}
+
+.navegadores i:nth-child(7):hover{
+    color: #f85f1b;
+}
+
+
 .cubos{
+    animation: colorChange 12s linear infinite;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -847,8 +900,10 @@ h2 {
     .lema p{
         margin-bottom: 50px;
     }
+    .cubos{
+        margin: 50px 20px 20px 20px;
+    }
 }
-
 @media (max-width: 404px) {
     logo img {
         height: 0;
@@ -970,7 +1025,7 @@ h2 {
 
 @keyframes colorChange{
     0%, 100%{
-        filter: hue-rotate(270deg);
+        filter: hue-rotate(0deg);
     }
     50%{
         filter: hue-rotate(360deg);
