@@ -413,6 +413,107 @@ h2 {
     color: #1E3A59;
 }
 
+/*Uso*/
+
+.uso{
+    text-align: center;
+    width: 100%;
+    font-family: "Glory", serif; 
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.uso h1{
+    font-weight: normal;
+    font-size: 40px;
+    text-decoration: underline;
+}
+
+.uso p{
+    font-family: 'Glory', serif;
+    font-weight: 200;
+    font-size: 20px;
+}
+
+.uso p span{
+    font-family: 'Hammersmith One', serif;
+    font-weight: 100;
+}
+
+.conteiner{
+    margin: 30px;
+    background: white;
+    width: 95%;
+    font-size: 16px;
+    display: grid;
+    grid-template-columns: 2fr 9fr;
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+}
+
+.tabs{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background: #ffffff;
+    border-radius: 20px;
+}
+
+.conteiner .tabs h3{
+    margin: 0;
+    height: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 1.2em;
+    font-weight: 600;
+    cursor: url('./img/mano.png'), auto;
+}
+.conteiner .tabs h3 i{
+    margin-top: 20px;
+}
+
+.tab-content{
+    background: #212329;
+    padding: 1.5em 1em;
+}
+
+.tab-content i{
+    font-size: 40px;
+    color: #EAECEE;
+}
+
+.tab-content h4{
+    font-size: 24px;
+    margin-bottom: 0.5em;
+    color: #EAECEE;
+    font-weight: 400;
+}
+
+.tab-content p{
+    text-align: justify;
+    line-height: 1.9;
+    letter-spacing: 0.4px;
+    color: #EAECEE;
+}
+
+
+
+.tab-content div{
+    display: none;
+}
+
+.tab-content .active{
+    display: block;
+}
+
+.tabs .active{
+    background: #212329;
+    color: #EAECEE;
+}
+
 /*Desarrollo*/
 
 .desarrollo{
@@ -444,7 +545,7 @@ h2 {
 }
 .create .nombre{
     text-align: justify;
-    background: rgb(29, 31, 68);
+    background: #212329;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -484,7 +585,7 @@ h2 {
 
 .create .lateral{
     text-align: justify;
-    background: rgb(29, 31, 68);
+    background: #212329;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -508,7 +609,7 @@ h2 {
 }
 
 .lenguajes i{
-    color: #1a2349;
+    color: #2d3038;
     font-size: 50px;
     transition: all 800ms;
     cursor: url('./img/mano.png'), auto;
@@ -547,7 +648,7 @@ h2 {
     font-weight: normal;
     font-size: 40px;
     text-decoration: underline;
-    margin: 50px;
+    margin: 50px 50px 10px 50px;
 }
 
 .caja{
@@ -784,6 +885,10 @@ h2 {
         margin: 50px 70px 2px 70px;
     }
 
+    .funciones .penta div:nth-child(2) i{
+        transform: rotate(180deg);
+    }
+
     .funciones .penta div:nth-child(4) p{
         font-family: "Glory", serif; 
         font-size: 20px;
@@ -1006,6 +1111,17 @@ h2 {
 }
 
 .cont{
+    view-timeline-name: --caja;
+    view-timeline-axis: block;
+
+    animation-timeline: --caja;
+    animation-name: escala;
+
+    animation-range: entry 30% cover 40%; 
+    animation-fill-mode: both;
+}
+
+.conteiner{
     view-timeline-name: --caja;
     view-timeline-axis: block;
 
