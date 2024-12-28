@@ -113,7 +113,7 @@ nav .nav-content{
 .nav-content .toggle-btn{
     font-size: 30px;
     z-index: 101;
-     cursor: url('./img/mano.png'), auto;
+    cursor: url('./img/mano.png'), auto;
     transform: rotate(45deg);
     background: linear-gradient(to left, #1A284B, #233D80);
     color: white;
@@ -436,6 +436,13 @@ h2 {
     font-family: 'Glory', serif;
     font-weight: 200;
     font-size: 20px;
+    margin: 0;
+}
+
+.uso p i{
+    font-size: 16px;
+    color: #2d3038;
+    margin: 0;
 }
 
 .uso p span{
@@ -443,75 +450,217 @@ h2 {
     font-weight: 100;
 }
 
-.conteiner{
-    margin: 30px;
-    background: white;
-    width: 95%;
-    font-size: 16px;
-    display: grid;
-    grid-template-columns: 2fr 9fr;
-    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
-}
-
-.tabs{
+.guia{
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    background: #ffffff;
-    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
 }
 
-.conteiner .tabs h3{
-    margin: 0;
-    height: 50%;
-    display: grid;
-    place-items: center;
-    font-size: 1.2em;
-    font-weight: 600;
+.cartas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.carta{
+    margin: 50px;
+    text-align: center;
+    transition: all 1s cubic-bezier(0.7, -.5, 0.3, 1.8);
+    transform-style: preserve-3d;
+}
+
+.carta:hover{
+    transform: rotateY(180deg) ;
+}
+
+.front, 
+.back{
+    width: 250px;
+    position: relative;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+}
+
+.front{
     cursor: url('./img/mano.png'), auto;
-}
-.conteiner .tabs h3 i{
-    margin-top: 20px;
-}
-
-.tab-content{
+    height: 400px;
     background: #212329;
-    padding: 1.5em 1em;
+    backface-visibility: hidden;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    filter: drop-shadow(-10px 10px 4px rgba(0, 0, 0, 0.5));
+
 }
 
-.tab-content i{
+.front h4{
+    color: #EAECEE;
+    font-family: 'Hammersmith One', serif;
+    font-weight: 300;
+    font-size: 20px;
+}
+
+.front i{
+    color: #2d3038;
     font-size: 40px;
-    color: #EAECEE;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
 }
 
-.tab-content h4{
-    font-size: 24px;
-    margin-bottom: 0.5em;
-    color: #EAECEE;
-    font-weight: 400;
+.back{
+    transform: rotateY(180deg);
+    position: absolute;
+    border-radius: 50px;
+    background: #101924;
+    height: 400px;
+    filter: drop-shadow(-10px 10px 4px rgba(0, 0, 0, 0.5));
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.tab-content p{
+.content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.content h4{
+    color: #EAECEE;
+    font-family: 'Hammersmith One', serif;
+    font-weight: 300;
+    font-size: 20px;
+}
+
+.content i{
+    color: #2d3038;
+    font-size: 40px;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
+}
+
+.content p{
+    color: #c5c5c5;
+    font-family: 'Glory',serif;
+    font-size: 15px;
+    margin: 5px 30px;
     text-align: justify;
-    line-height: 1.9;
-    letter-spacing: 0.4px;
+}
+
+.uso p:nth-child(3){
+    margin-bottom: 20px;
+}
+
+.muestrame{
+    width: 100px;
+    height: 40px;
+    background: #21232b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
     color: #EAECEE;
+    filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.5));
+    border-radius: 10px;
+    cursor: url('./img/mano.png'), auto;
+    transition: all 0.5s;
+    font-family: 'Hammersmith One',serif;
+    font-size: 16px;
+}
+
+.muestrame:hover{
+    background: #355ab9;
+    animation: colorChange 12s linear infinite;
+    transform: scale(1.1);
+    box-shadow: 0 0 9vw rgb(73, 119, 245, 0.2),
+    0 0 10vw rgb(73, 119, 245, 0.4),
+    0 0 18vw rgb(73, 119, 245, 0.6),
+    0 0 22vw rgb(73, 119, 245, 0.8);
+}
+
+.cir{
+    border-radius: 50%;
+    background: #fff;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.5));
 }
 
 
-
-.tab-content div{
+.parte1, .parte2{
     display: none;
+    width: 30%;
+    justify-content: center;
+    align-items: center;
 }
 
-.tab-content .active{
-    display: block;
+.parte1{
+    align-items: flex-end;
+}
+.parte2{
+    align-items: flex-start;
 }
 
-.tabs .active{
-    background: #212329;
-    color: #EAECEE;
+.mostrar{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    transition: all 1s;
+}
+
+.guias{
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-around;
+}
+
+.guias p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.cir img{
+    width: 32px;
+}
+
+
+#biblioteca,
+#diagramas{
+    animation: bounceInLeft;
+}
+#biblioteca{
+    animation-duration: 1s;
+}
+
+#diagramas{
+    animation-duration: 2s;
+}
+
+#logic, 
+#question{
+    animation: bounceInRight;
+}
+
+#logic{
+    animation-duration: 2.5s;
+}
+
+#logic .cir{
+    background: linear-gradient(to left, #1A284B, #233D80);
+}
+
+#question{
+    animation-duration: 3.5s;
 }
 
 /*Desarrollo*/
@@ -1010,6 +1159,10 @@ h2 {
     .cubos{
         margin: 50px 20px 20px 20px;
     }
+
+    .guia{
+        flex-direction: column;
+    }
 }
 @media (max-width: 404px) {
     logo img {
@@ -1129,6 +1282,17 @@ h2 {
     animation-name: escala;
 
     animation-range: entry 30% cover 40%; 
+    animation-fill-mode: both;
+}
+
+.guia{
+    view-timeline-name: --lateral;
+    view-timeline-axis: block;
+
+    animation-timeline: --lateral;
+    animation-name: escala;
+
+    animation-range: entry 20% cover 40%; 
     animation-fill-mode: both;
 }
 

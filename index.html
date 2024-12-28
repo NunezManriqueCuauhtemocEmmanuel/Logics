@@ -13,6 +13,7 @@
   <script defer src="./js/animaciones.js"></script>
   <script defer src="./js/ciclebar.js"></script>
   <script defer src="./js/tabs.js"></script>
+  <script defer src="./js/mostrar.js"></script>
   <title>LogicS</title>
 </head>
 
@@ -30,8 +31,7 @@
       <p>Inicio</p>
     </div>
     <div class="busqueda">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <p>Busqueda</p>
+      <p>LogicS</p>
     </div>
   </div>
 
@@ -47,7 +47,7 @@
         <a href="#"><i class="fa-solid fa-question"></i></a>
       </span>
       <span style="--i:3;">
-        <a href="beta.html"><img src="./img/Logics.svg" alt=""></i></a>
+        <a href="beta.html"><img src="./img/Logics.svg" alt=""></a>
       </span>
       <span style="--i:4;">
         <a href="#"><i class="fa-solid fa-diagram-project"></i></a>
@@ -108,31 +108,62 @@
   <div class="uso">
     <h1 class="hidden">Guia</h1>
     <p class="hidden">Si esta es tu primera vez utilizando <span>LogicS</span> te recomendamos leer esta sección para un mejor entendimiento de la herramienta</p>
-    <div class="conteiner">
-      <div class="tabs">
-        <h3 class="active"><i class="fa-solid fa-compass"></i>Navegación</h3>
-        <h3><i class="fa-solid fa-circle-dot"></i>Botones</h3>
-        <h3><i class="fa-solid fa-bookmark"></i>Sección</h3>
-      </div>
-      <div class="tab-content">
-        <div class="active">
-          <i class="fa-solid fa-compass"></i>
-          <h4>Navegacíon</h4>
-          
+    <p class="hidden">En este momento estas en la seccion de Inicio, esta representada en el menu circular como el icono</p>
+    <div class="cir hidden"><i class="fa-solid fa-house"></i> </div>
+    <div class="guia">
+      
+      <div class="parte1" id="circlesLeft">
+        <div class="guias" id="biblioteca">
+          <p>Este boton lleva a la biblioteca de datos</p>
+          <div class="cir">
+            <i class="fa-solid fa-book"></i>
+          </div>
         </div>
-        <div>
-          <h4>Segundo titulo</h4>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
-            Iure, voluptatibus. Deleniti exercitationem unde debitis reprehenderit sapiente maxime mollitia culpa ut nemo recusandae. Minima, aut necessitatibus?</p>
-        </div>
-        <div>
-          <h4>Tercer titulo</h4>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
-            Iure, voluptatibus. Deleniti exercitationem unde debitis reprehenderit sapiente maxime mollitia culpa ut nemo recusandae. Minima, aut necessitatibus?</p>
+        <div class="guias" id="diagramas">
+          <p>Este boton lleva a la seccion de </p>
+          <div class="cir">
+            <i class="fa-solid fa-diagram-project"></i>
+          </div>
         </div>
       </div>
+
+      <div class="cartas">
+        <div class="carta">
+          <div class="front">
+            <i class="fa-solid fa-compass"></i>
+            <h4>Navegacion</h4>
+          </div>
+          <div class="back">
+            <div class="content">
+              <i class="fa-solid fa-compass"></i>
+              <h4>Navegacion</h4>
+              <p>Ingresar a LogicS es bastante sencillo, solo presiona el boton boton azul que se encuentra en el lado derecho de la pantalla o arriba segun el dispositivo que estes ocupando, si deseas descubrir la funcion de cada boton, presiona "muestrame"</p>
+              <div class="muestrame" onclick="toggleCircles()">
+                Muestrame
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="parte2" id="circlesRight">
+        <div class="guias" id="logic">
+          <div class="cir">
+            <img src="./img/Logics.svg" width="32px">
+          </div>
+          <p>Este boton lleva a la aplicacion LogicS</p>
+        </div>
+        <div class="guias" id="question">
+          <div class="cir">
+            <i class="fa-solid fa-question"></i>
+          </div>
+          <p>Este boton lleva a la seccion de dudas de LogicS</p>
+        </div>
+      </div>
+
     </div>
   </div>
+  
 
   <div class="desarrollo">
     <h1>Creación</h1>
@@ -233,7 +264,11 @@
     </div>
   </div>
 
-  <div class="foter">
+  <div class="multimedia">
+    <h1>Multimedia</h1>
+  </div>
+
+  <div class="footer">
     a
   </div>
 
