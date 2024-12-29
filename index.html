@@ -14,16 +14,21 @@
   <script defer src="./js/ciclebar.js"></script>
   <script defer src="./js/tabs.js"></script>
   <script defer src="./js/mostrar.js"></script>
+  <script defer src="./js/fecha.js"></script>
   <title>LogicS</title>
 </head>
 
 <body>
 
   <div class="header">
-    <div class="fecha">
-      <p>Miercoles, 25-Dic</p>
-      <i class="fa-solid fa-sun"></i>
-      <p>22* Sala Principal</p>
+    <div class="data">
+      <div class="fecha" id="date-container">
+      </div>
+      <div id="ico-container" class="ico">
+      </div>
+      <div id="time-container" class="time">
+      </div>
+      <p> | 22* Sala Principal</p>
     </div>
     <div class="centro">
       <i class="fa-solid fa-house"></i>
@@ -53,7 +58,7 @@
         <a href="#"><i class="fa-solid fa-diagram-project"></i></a>
       </span>
       <span style="--i:5;">
-        <a href="#"><i class="fa-solid fa-book"></i></a>
+        <a href="biblioteca.html"><i class="fa-solid fa-book"></i></a>
       </span>
     </div>
   </nav>
@@ -63,7 +68,10 @@
       <img src="./img/Logics.png">
       <h2>LogicS</h2>
     </div>
-    <div class="box">
+    <div class="box hidden">
+      <div></div>
+      <div></div>
+      <div></div>
       <div></div>
       <div></div>
       <div></div>
