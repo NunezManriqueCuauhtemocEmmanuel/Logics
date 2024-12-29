@@ -1034,14 +1034,45 @@ h2 {
 }
 
 .social i{
-    color: white;
-    font-size: 40px;
+    color: #3a3e49;
+    font-size: 30px;
     margin: 20px;
+    transition: all 0.5s;
+}
+
+.social i:hover{
+   transform: translateY(-10px) scale(1.2);
+}
+
+.social i:nth-child(1):hover,
+.social i:nth-child(7):hover{
+    color: rgb(255, 255, 255);   
+}
+
+.social i:nth-child(2):hover{
+    color: rgb(25, 99, 209);
+}
+
+.social i:nth-child(3):hover{
+    color: rgb(42, 127, 255); 
+    animation: colorChange 5s linear infinite;  
+}
+
+.social i:nth-child(4):hover{
+    animation: tiktok 1s alternate infinite;  
+}
+
+.social i:nth-child(5):hover{
+    color: #7289da;  
+}
+
+.social i:nth-child(6):hover{
+    color: #c4302b;  
 }
 
 .pie img{
     margin: 50px 20px 30px 20px;
-    filter: drop-shadow(-0px 9px 10px rgb(0, 0, 0));
+    filter: drop-shadow(-3px 9px 9px rgb(0, 0, 0));
 }
 
 .links{
@@ -1055,16 +1086,34 @@ h2 {
 }
 
 .links li{
+    margin: 10px;
     list-style: none;
-    width: 100px; 
+    width: 80px; 
     text-align: center;
 }
 
 .links li a{
     text-decoration: none;
-    color: #ffffff;
+    color: #7d839c;
+    font-weight: 500;
+    font-size: 20px;
 }
 
+.pie p{
+    color: #b1b6ca;
+}
+
+.pie img{
+    filter: grayscale(120%);
+    transition: all 0.5s;
+    opacity: 50%;
+}
+
+.pie img:hover{
+    transform: scale(1.5);
+    opacity: 100%;
+    filter: grayscale(0%) drop-shadow(0px 5px 20px rgb(24, 91, 235));
+}
 
 /*Animaciones*/
 
@@ -1386,5 +1435,19 @@ h2 {
     }
     50%{
         filter: hue-rotate(360deg);
+    }
+}
+
+@keyframes tiktok{
+    0%{
+        color: #ff0050;
+    }
+
+    50%{
+        color: #000000;
+    }
+
+    100%{
+        color: #00f2ea;
     }
 }
