@@ -13,14 +13,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <script defer src="./js/animaciones.js"></script>
     <script defer src="./js/ciclebar.js"></script>
+    <script defer src="./js/fecha.js"></script>
 </head>
 <body>
     <!--Cabecera y circulo de navegacion-->
     <div class="header">
-        <div class="fecha">
-          <p>Miercoles, 25-Dic</p>
-          <i class="fa-solid fa-sun"></i>
-          <p>22* Sala Biblioteca</p>
+        <div class="data">
+            <div class="fecha" id="date-container">
+            </div>
+            <div id="ico-container" class="ico">
+            </div>
+            <div id="time-container" class="time">
+            </div>
+            <p> | 22* Sala Principal</p>
         </div>
         <div class="centro">
           <i class="fa-solid fa-book"></i>
@@ -28,31 +33,82 @@
           <p>Biblioteca</p>
         </div>
         <div class="busqueda">
-          <p>LogicS</p>
+          <button class="header-toggle" id="header-toggle">
+            <i class="fa-solid fa-bars"></i>
+          </button>
         </div>
-      </div>
-    
-      <nav class="">
-        <div class="nav-content">
-          <div class="toggle-btn">
-            <i class="fa-solid fa-angles-left"></i>
-          </div>
-          <span style="--i:1;">
-            <a href="index.html"><i class="fa-solid fa-house"></i></a>
-          </span>
-          <span style="--i:2;">
-            <a href="#"><i class="fa-solid fa-question"></i></a>
-          </span>
-          <span style="--i:3;">
-            <a href="beta.html"><img src="./img/Logics.svg" alt=""></a>
-          </span>
-          <span style="--i:4;">
-            <a href="#"><i class="fa-solid fa-diagram-project"></i></a>
-          </span>
-          <span style="--i:5;">
-            <a href="biblioteca.html"><i class="fa-solid fa-book"></i></a>
-          </span>
+    </div>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-container">
+            <div class="sidebar-user">
+                <div class="side-information">
+                    <h3>Navegacion</h3>
+                    <span>Esto es LogicS</span>
+                </div>
+            </div>
+
+            <div class="sidebar-content">
+                <div>
+                    <h3 class="sidebar_title">Contenido</h3>
+                    <div class="sidebar_list">
+                        <a href="" class="sidebar_link">
+                            <i class="fa-solid fa-house"></i>
+                            <span>Inicio</span>
+                        </a>
+                        <a href="" class="sidebar_link">
+                            <i class="fa-solid fa-book"></i>
+                            <span>Biblioteca</span>
+                        </a>
+                        <a href="" class="sidebar_link">
+                            <i class="fa-solid fa-diagram-project"></i>
+                            <span>Servicio</span>
+                        </a>
+                        <a href="" class="sidebar_link">
+                            <img src="./img/Logics.png" width="20px">
+                            <span>LogicS</span>
+                        </a>
+                        <a href="" class="sidebar_link">
+                            <i class="fa-solid fa-question"></i>
+                            <span>Dudas</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-actions">
+
+            </div>
         </div>
-      </nav>
+    </nav>
+
+    <section class="bienvenida">
+        <h1>Bienvenido</h1>
+        <h3>Usuario</h3>
+    </section>
+
+    <footer class="footer">
+        <div class="pie">
+            <div class="social">
+              <i class="fa-brands fa-github"></i>
+              <i class="fa-brands fa-facebook"></i>
+              <i class="fa-brands fa-instagram"></i>
+              <i class="fa-brands fa-tiktok"></i>
+              <i class="fa-brands fa-discord"></i>
+              <i class="fa-brands fa-youtube"></i>
+              <i class="fa-brands fa-x-twitter"></i>
+            </div>
+            <ul class="links">
+              <li><a href="#datos">Inicio</a></li>
+              <li><a href="#func">Funciones</a></li>
+              <li><a href="#guia">Guia</a></li>
+              <li><a href="#crear">Creación</a></li>
+              <li><a href="#paridad">Paridad</a></li>
+              <li><a href="#multi">Multimedia</a></li>
+            </ul>
+            <img src="./img/ManLetra.png" width="70px">
+            <p>@2025 | Todos los derechos reservados pertenecen a MGMC</p>
+        </div>
+    </footer>
 </body>
 </html>
