@@ -1,0 +1,185 @@
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+nav {
+    position: fixed;
+    display: flex;
+    justify-content: flex-end;
+    max-width: 480px;
+    width: 100%;
+    height: 500px;
+    right: -300px;
+    top: 15%;
+    transition: all 0.4s;
+}
+
+.show-radiar {
+    right: 50px;
+    transition: right 0.4s;
+}
+
+nav .link {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 57%;
+    margin-top: -20px;
+    right: 0;
+    cursor: pointer;
+    z-index: 99;
+    font-size: 20px;
+    color: white;
+}
+
+nav .link::before {
+    content: "";
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    background: #0d1c33;
+    border-radius: 50%;
+    transform: scale(2);
+    z-index: -2;
+}
+
+nav .link::after {
+    content: "";
+    position: absolute;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    border-radius: 50%;
+    z-index: -1;
+    transform: scale(2);
+    opacity: .3;
+}
+
+nav .link .close,
+nav input:checked ~ label .menu {
+    display: none;
+}
+
+nav input:checked ~ label .close {
+    display: block;
+}
+
+nav ul.submenu {
+    position: absolute;
+    top: 0;
+    right: 0.5em;
+    width: 350px;
+    height: 500px;
+    transform: rotate(90deg);
+    visibility: hidden;
+    transition: visibility .1s;
+}
+
+nav > input:checked ~ ul {
+    visibility: inherit;
+}
+
+nav > input:checked ~ ul li {
+    transform: rotate(calc((-180deg / 6) * var(--item))) translateX(0px);
+    opacity: 1;
+}
+
+nav ul.submenu li {
+    --item: 1;
+    position: absolute;
+    width: 175px;
+    height: 60px;
+    transform: rotate(calc((-180deg / 6) * var(--item))) translateX(90px);
+    transform-origin: right center;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transition: transform .7s, opacity .2s;
+}
+
+nav ul li:nth-child(2) {
+    --item: 2;
+}
+nav ul li:nth-child(3) {
+    --item: 3;
+}
+nav ul li:nth-child(4) {
+    --item: 4;
+}
+nav ul li:nth-child(5) {
+    --item: 5;
+}
+
+nav ul li a {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li a div {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #0d1c33;
+    color: white;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+nav ul li a span {
+    color: #0d1c33;
+    font-family: 'Hammersmith one', serif;
+    position: absolute;
+    right: calc(100% + 0.5em);
+    text-align: right;
+    font-size: 14px;
+    padding: 10px;
+    transform: translateX(50px);
+    opacity: 0;
+    transition: color .3s, transform .3s, opacity .2s;
+    border-radius: 25px;
+    background: linear-gradient(to right, transparent 25%, #0d1c33);
+    z-index: -1;
+}
+
+nav ul li a div:hover{
+    background: white;
+    color: #0d1c33;
+}
+nav ul li:nth-child(3) a div:hover {
+    background: linear-gradient(to left, #1A284B, #233D80);
+}
+
+nav ul li a div:hover + span,
+nav ul li a:hover span {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Efecto ::before en el texto (subrayado animado) */
+nav ul li a span::before{
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    border-radius: 25px;
+    background: #EAECEE;
+    z-index: -1;
+    transition: background .3s;
+}
+
+
+
+

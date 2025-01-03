@@ -6,14 +6,16 @@
     <title>Biblioteca</title>
     <link rel="icon" href="./img/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/biblioteca.css">
+    <link rel="stylesheet" href="./css/boton.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Glory:ital,wght@0,100..800;1,100..800&family=Hammersmith+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <script defer src="./js/animaciones.js"></script>
-    <script defer src="./js/ciclebar.js"></script>
+    <script defer src="./js/sidebar.js"></script>
     <script defer src="./js/fecha.js"></script>
+
 </head>
 <body>
     <!--Cabecera y circulo de navegacion-->
@@ -39,48 +41,22 @@
         </div>
     </div>
 
-    <nav class="sidebar" id="sidebar">
-        <div class="sidebar-container">
-            <div class="sidebar-user">
-                <div class="side-information">
-                    <h3>Navegacion</h3>
-                    <span>Esto es LogicS</span>
-                </div>
-            </div>
+    <nav class="radiarbar" id="radiarbar">
+      <input type="checkbox" id="link" hidden>
+      <label for="link" class="link">
+        <i class="menu fa-solid fa-angles-left"></i>
+        <i class="close fa-solid fa-xmark"></i>
+      </label>
 
-            <div class="sidebar-content">
-                <div>
-                    <h3 class="sidebar_title">Contenido</h3>
-                    <div class="sidebar_list">
-                        <a href="" class="sidebar_link">
-                            <i class="fa-solid fa-house"></i>
-                            <span>Inicio</span>
-                        </a>
-                        <a href="" class="sidebar_link">
-                            <i class="fa-solid fa-book"></i>
-                            <span>Biblioteca</span>
-                        </a>
-                        <a href="" class="sidebar_link">
-                            <i class="fa-solid fa-diagram-project"></i>
-                            <span>Servicio</span>
-                        </a>
-                        <a href="" class="sidebar_link">
-                            <img src="./img/Logics.png" width="20px">
-                            <span>LogicS</span>
-                        </a>
-                        <a href="" class="sidebar_link">
-                            <i class="fa-solid fa-question"></i>
-                            <span>Dudas</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="sidebar-actions">
-
-            </div>
-        </div>
+      <ul class="submenu">
+        <li><a href="index.html"><span>Inicio</span><div><i class="fa-solid fa-house"></i></div></a></li>
+        <li><a href="biblioteca.html"><span>Biblioteca</span><div><i class="fa-solid fa-book"></i></div></a></li>
+        <li><a href=""><span>LogicS</span><div><img src="./img/Logics.svg" width="20px"></div></a></li>
+        <li><a href=""><span>Servicio</span><div><i class="fa-regular fa-handshake"></i></div></a></li>
+        <li><a href=""><span>Dudas</span><div><i class="fa-solid fa-question"></i></div></a></li>
+      </ul>
     </nav>
+
 
     <section class="bienvenida">
         <h1>Bienvenido</h1>

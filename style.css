@@ -1,10 +1,15 @@
+html {
+    scrollbar-color: #131835 transparent; /* thumb (primero) y track (segundo) */
+    scrollbar-width: medium; /* Opciones: auto | thin | none */
+}
+
 body {
     margin: 0;
     padding: 0;
     background: #EAECEE;
     box-sizing: border-box;
     overflow-x: hidden;
-    cursor: url('./img/punteroAzul.png'), auto;
+    cursor: url('./img/puntero16.png'), auto;
 }
 
 /*Header*/
@@ -75,99 +80,21 @@ body {
 }
 
 .header .busqueda{
-    width: 30%;
+    width: 30vw;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #1E3A59;
 }
-.header .busqueda p{
+
+.header .busqueda button{
+    cursor: url('../img/mano.png'), auto;
+}
+
+.header .busqueda .header-toggle{
     margin-left: 10px;
-    font-weight: lighter;
-}
-/*Navbar*/
-
-nav{
-    z-index: 100;
-    position: fixed;
-    top: 45%;
-    right: 30px;
-    cursor: url('./img/mano.png'), auto;
-    transform: rotate(-45deg);
-    animation: backInRight;
-    animation-duration: 1s;
-    transition: all 1s;
-}
-
-nav .nav-content{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.nav-content .toggle-btn,
-.nav-content span a{
-    height: 60px;
-    width: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: all 1s;
-    cursor: url('./img/mano.png'), auto;
-}
-
-.nav-content .toggle-btn{
-    font-size: 30px;
-    z-index: 101;
-    cursor: url('./img/mano.png'), auto;
-    transform: rotate(45deg);
-    background: #212329;
-    color: white;
-}
-
-nav.open .nav-content .toggle-btn{
-    transform: rotate(-45deg);
-}
-
-nav.open .nav-content span{
-    transition: all 1s;
-    transform: rotate(calc(var(--i) * (360deg/8))) translateY(100px);
-}
-
-.nav-content span{
-    transition: all 1s;
-    position: absolute;
-}
-
-.nav-content span a{
-    text-decoration: none;
-    transform: rotate(45deg);
-}
-
-.nav-content span a i{
-    color: #1A284B;
-    font-size: 24px;
-    transform: rotate(calc(var(--i) * (360deg/-8)))
-}
-
-.nav-content span a img{
-    width: 32px;
-    transform: rotate(calc(var(--i) * (360deg/-8)))
-}
-
-.nav-content span:nth-child(1),
-.nav-content span:nth-child(2),
-.nav-content span:nth-child(3),
-.nav-content span:nth-child(5),
-.nav-content span:nth-child(6){
-    border-radius: 50%;
-    background: #fff;
-}
-
-.nav-content span:nth-child(4){
-    border-radius: 50%;
-    background: linear-gradient(to left, #1A284B, #233D80);
+    font-size: 1.5rem;
+    border: none;
 }
 
 /*Logo*/
@@ -181,6 +108,7 @@ nav.open .nav-content span{
     justify-content: center; /* Centra verticalmente */
     gap: 20px; /* Espaciado entre elementos */
     position: relative; /* Permite posicionar elementos internos sin salir del flujo */
+    z-index: -3;
 }
   
 .logo {

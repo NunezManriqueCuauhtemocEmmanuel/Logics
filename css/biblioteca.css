@@ -1,3 +1,8 @@
+html {
+    scrollbar-color: #131835 transparent; /* thumb (primero) y track (segundo) */
+    scrollbar-width: medium; /* Opciones: auto | thin | none */
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -95,37 +100,7 @@ body {
     border: none;
 }
 
-.sidebar{
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 100;
-    width: 228px;
-    background: #EAECEE;
-    box-shadow: 2px 0px 24px black;
-    padding-block: 1.5rem;
-    transition: left .4s, background-color .4s, width 0.4s;
-    font-family: 'Glory', serif;
-}
-
-.sidebar-information h3{
-    font-size: 20px;
-}
-
-.sidebar-container,
-.sidebar-content{
-    display: flex;
-    flex-direction: column;
-    row-gap: 3rem;
-}
-
-.sidebar-container{
-    height: 100%;
-    overflow: hidden;
-}
 /*Navbar*/
-
 
 /*Bienvenida*/
 
@@ -169,6 +144,7 @@ body {
     background: #212329;
     min-height: 100px;
     box-shadow: 0px -9px 10px rgba(0, 0, 0, 0.5);
+    z-index: 200;
 }
 
 .pie{
@@ -176,7 +152,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 60px;
+    margin: 40px;
 }
 
 .social i{
@@ -217,7 +193,7 @@ body {
 }
 
 .pie img{
-    margin: 50px 20px 30px 20px;
+    margin: 20px 20px 30px 20px;
     filter: drop-shadow(-3px 9px 9px rgb(0, 0, 0));
 }
 
@@ -283,3 +259,61 @@ body {
         color: #00f2ea;
     }
 }
+
+@media screen and (max-width: 360px) {
+  
+    .sidebar {
+      width: max-content;
+    }
+
+    .side-information,
+    .sidebar_link span {
+      display: none;
+    }
+    .sidebar-user, 
+    .sidebar_list, 
+    .sidebar_actions {
+      justify-content: center;
+    }
+    .sidebar_user, 
+    .sidebar_link {
+      grid-template-columns: max-content;
+    }
+    .sidebar_user {
+      padding: 0;
+    }
+    .sidebar_link {
+      padding-inline: 2rem;
+    }
+    .sidebar_title {
+      padding-inline: .5rem;
+      margin-inline: auto;
+    }
+  }
+
+
+  @media screen and (min-width: 1150px) {
+    .header {
+      transition: padding .4s;
+    }
+
+  
+    /* Reduce sidebar */
+    .show-sidebar {
+      width: 90px;
+    }
+    .show-sidebar .sidebar_user {
+      padding-left: 1.25rem;
+    }
+    .show-sidebar .sidebar_title {
+      padding-left: 1.2rem;
+      margin-inline: auto;
+    }
+    .show-sidebar .side-information, 
+    .show-sidebar .sidebar_link span {
+      opacity: 0;
+    }
+  
+    
+}
+  

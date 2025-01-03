@@ -5,16 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="./img/icon.png" type="image/x-icon">
   <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./css/boton.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="https://fonts.googleapis.com/css2?family=Glory:ital,wght@0,100..800;1,100..800&family=Hammersmith+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <script defer src="./js/animaciones.js"></script>
-  <script defer src="./js/ciclebar.js"></script>
   <script defer src="./js/tabs.js"></script>
   <script defer src="./js/mostrar.js"></script>
   <script defer src="./js/fecha.js"></script>
+  <script defer src="./js/sidebar.js"></script>
   <title>LogicS</title>
 </head>
 
@@ -36,31 +37,26 @@
       <p>Inicio</p>
     </div>
     <div class="busqueda">
-      <p>LogicS</p>
+      <button class="header-toggle" id="header-toggle">
+        <i class="fa-solid fa-bars"></i>
+      </button>
     </div>
   </div>
 
-  <nav class="">
-    <div class="nav-content">
-      <div class="toggle-btn">
-        <i class="fa-solid fa-angles-left"></i>
-      </div>
-      <span style="--i:1;">
-        <a href="index.html"><i class="fa-solid fa-house"></i></a>
-      </span>
-      <span style="--i:2;">
-        <a href="#"><i class="fa-solid fa-question"></i></a>
-      </span>
-      <span style="--i:3;">
-        <a href="beta.html"><img src="./img/Logics.svg" alt=""></a>
-      </span>
-      <span style="--i:4;">
-        <a href="#"><i class="fa-solid fa-diagram-project"></i></a>
-      </span>
-      <span style="--i:5;">
-        <a href="biblioteca.html"><i class="fa-solid fa-book"></i></a>
-      </span>
-    </div>
+  <nav class="radiarbar" id="radiarbar">
+    <input type="checkbox" id="link" hidden>
+    <label for="link" class="link">
+      <i class="menu fa-solid fa-angles-left"></i>
+      <i class="close fa-solid fa-xmark"></i>
+    </label>
+
+    <ul class="submenu">
+      <li><a href="index.html"><span>Inicio</span><div><i class="fa-solid fa-house"></i></div></a></li>
+      <li><a href="biblioteca.html"><span>Biblioteca</span><div><i class="fa-solid fa-book"></i></div></a></li>
+      <li><a href=""><span>LogicS</span><div><img src="./img/Logics.svg" width="20px"></div></a></li>
+      <li><a href=""><span>Servicio</span><div><i class="fa-regular fa-handshake"></i></div></a></li>
+      <li><a href=""><span>Dudas</span><div><i class="fa-solid fa-question"></i></div></a></li>
+    </ul>
   </nav>
 
   <div class="wrapped">
