@@ -1,222 +1,292 @@
-function insertSymbol(symbol) {
-    const textarea = document.getElementById('logicExpression');
-    textarea.value += symbol;
-    textarea.focus();
-}
+const $ = go.GraphObject.make;
+const myDiagram = $(go.Diagram, "diagramDiv", {
+  "undoManager.isEnabled": true,
+  layout: $(go.TreeLayout, { angle: 180, layerSpacing: 35 })
+});
 
-function validateExpression(expression) {
-    const validChars = /^[a-z∧∨¬⊕()\s]*$/i;
-    if (!validChars.test(expression)) {
-        throw new Error('La expresión contiene caracteres no válidos.');
+myDiagram.nodeTemplateMap.add("AND",
+  $(go.Node, "Auto",
+    $(go.Shape, "Rectangle", { fill: "blue", strokeWidth: 0, }),
+    $(go.TextBlock, { margin: 8 }, new go.Binding("text", "key"))
+  )
+);
+
+myDiagram.nodeTemplateMap.add("OR",
+  $(go.Node, "Auto",
+    $(go.Shape, "Rectangle", { fill: "green", strokeWidth: 0 }),
+    $(go.TextBlock, { margin: 8 }, new go.Binding("text", "key"))
+  )
+);
+
+myDiagram.nodeTemplateMap.add("NOT",
+  $(go.Node, "Spot",
+    $(go.Shape, "Triangle", {
+      fill: "red", // Color del triángulo
+      stroke: "black", // Borde del triángulo
+      desiredSize: new go.Size(70, 70), // Tamaño del triángulo
+      angle: 90 // Orientación del triángulo hacia la derecha
+    }),
+    $(go.TextBlock, {
+      margin: 0, 
+      font: "12px sans-serif", // Ajusta el tamaño y la fuente del texto
+      textAlign: "center", // Centra el texto
+      verticalAlignment: go.Spot.Center, // Centra el texto verticalmente
+      alignment: go.Spot.Center // Centra el texto dentro del triángulo
+    },
+      new go.Binding("text", "key"))
+  )
+);
+
+
+myDiagram.nodeTemplateMap.add("OUTPUT",
+  $(go.Node, "Auto",
+    $(go.Shape, "Rectangle", { fill: "yellow", strokeWidth: 0 }),
+    $(go.TextBlock, { margin: 8 }, new go.Binding("text", "key"))
+  )
+);
+
+function parseExpression(expr) {
+  // Mapear símbolos a operadores lógicos
+  expr = expr
+    .replace(/¬/g, 'NOT')
+    .replace(/∧/g, 'AND')
+    .replace(/∨/g, 'OR');
+
+  // Convertir todo a mayúsculas para unificar las variables
+  expr = expr.replace(/\b[a-zA-Z]\b/g, match => match.toUpperCase());
+
+  const operators = {
+    OR: 1, '|': 1,
+    AND: 2, '&': 2,
+    NOT: 4, '!': 4,
+  };
+
+  const isOperator = (token) => token in operators;
+  const precedence = (op) => operators[op];
+
+  const outputQueue = [];
+  const operatorStack = [];
+
+  const tokens = expr.match(/\w+|\(|\)|AND|OR|NOT|XOR|NAND|NOR|[&|^!]/g);
+
+  tokens.forEach((token) => {
+    if (isOperator(token)) {
+      while (
+        operatorStack.length > 0 &&
+        precedence(operatorStack[operatorStack.length - 1]) >= precedence(token) &&
+        operatorStack[operatorStack.length - 1] !== '('
+      ) {
+        outputQueue.push(operatorStack.pop());
+      }
+      operatorStack.push(token);
+    } else if (token === '(') {
+      operatorStack.push(token);
+    } else if (token === ')') {
+      while (operatorStack.length > 0 && operatorStack[operatorStack.length - 1] !== '(') {
+        outputQueue.push(operatorStack.pop());
+      }
+      operatorStack.pop();
+    } else {
+      outputQueue.push(token);
     }
+  });
 
-    const parentheses = expression.split('').reduce((count, char) => {
-        if (char === '(') count++;
-        if (char === ')') count--;
-        if (count < 0) throw new Error('Paréntesis desbalanceados.');
-        return count;
-    }, 0);
+  while (operatorStack.length > 0) {
+    outputQueue.push(operatorStack.pop());
+  }
 
-    if (parentheses !== 0) {
-        throw new Error('Paréntesis desbalanceados.');
-    }
-}
-
-function generateTable() {
-    const expression = document.getElementById('logicExpression').value.trim();
-    if (!expression) {
-        alert('Por favor, escribe una proposición lógica.');
-        return;
-    }
-
-    try {
-        validateExpression(expression);
-        const variables = Array.from(new Set(expression.match(/[a-z]/gi) || [])).sort();
-        const truthTable = generateTruthTable(variables);
-        const parsedExpression = parseExpression(expression, variables);
-        renderTruthTable(truthTable, parsedExpression);
-    } catch (error) {
-        alert('Error al procesar la proposición lógica: ' + error.message);
-    }
-}
-
-function generateTruthTable(variables) {
-    const rows = 2 ** variables.length;
-    return Array.from({ length: rows }, (_, i) =>
-        variables.reduce((row, variable, index) => {
-            row[variable] = (i >> (variables.length - 1 - index)) & 1;
-            return row;
-        }, {})
-    );
-}
-
-function parseExpression(expression, variables) {
-    const symbolMap = {
-        '∧': '&&',
-        '∨': '||',
-        '¬': '!',
-        '⊕': '^'
-    };
-
-    let jsExpression = expression
-        .replace(/[a-z]/gi, (match) => `row['${match}']`)
-        .replace(/[∧∨¬⊕]/g, (match) => symbolMap[match]);
-
-    return { 
-        expression,
-        variables, 
-        evaluate: new Function('row', `return ${jsExpression};`) 
-    };
-}
-
-function renderTruthTable(truthTable, parsedExpression) {
-    const { variables, evaluate } = parsedExpression;
-    const tableContainer = document.getElementById('truthTable');
-    tableContainer.innerHTML = '';
-
-    const table = document.createElement('table');
-    const headerRow = document.createElement('tr');
-
-    variables.forEach(variable => {
-        const th = document.createElement('th');
-        th.textContent = variable;
-        headerRow.appendChild(th);
-    });
-
-    const resultHeader = document.createElement('th');
-    resultHeader.textContent = 'Salida';
-    headerRow.appendChild(resultHeader);
-    table.appendChild(headerRow);
-
-    truthTable.forEach(row => {
-        const tr = document.createElement('tr');
-
-        variables.forEach(variable => {
-            const td = document.createElement('td');
-            td.textContent = row[variable];
-            tr.appendChild(td);
-        });
-
-        const resultCell = document.createElement('td');
-        try {
-            resultCell.innerHTML = evaluate(row) ? '<span class="highlight-not">1</span>' : '0';
-        } catch {
-            resultCell.textContent = 'Error';
+  function buildTree(queue) {
+    const stack = [];
+    queue.forEach((token) => {
+      if (isOperator(token)) {
+        const node = { key: token, category: token, children: [] };
+        if (token === 'NOT' || token === '!') {
+          node.children.push(stack.pop());
+        } else {
+          const right = stack.pop();
+          const left = stack.pop();
+          node.children.push(left, right);
         }
-        tr.appendChild(resultCell);
-        table.appendChild(tr);
+        stack.push(node);
+      } else {
+        stack.push({ key: token, category: "", children: [] });
+      }
     });
+    const root = stack[0];
+    const outputNode = { key: "OUTPUT", category: "OUTPUT", children: [root] };
+    return outputNode;
+  }
 
-    tableContainer.appendChild(table);
+  return buildTree(outputQueue);
+}
+
+function buildDiagramData(node, parentKey = null, diagramData = []) {
+  if (parentKey) {
+    diagramData.push({ from: parentKey, to: node.key });
+  }
+
+  if (!diagramData.some(d => d.key === node.key)) {
+    diagramData.push({ key: node.key, category: node.category });
+  }
+
+  node.children.forEach(child => buildDiagramData(child, node.key, diagramData));
+  return diagramData;
+}
+
+let uniqueNodeCounter = 1;
+function ensureUniqueKeys(node) {
+  if (node.children && node.children.length > 0) {
+    node.children.forEach(ensureUniqueKeys);
+  }
+  if (['AND', 'OR', 'NOT'].includes(node.key)) {
+    node.key = `${node.key}_${uniqueNodeCounter++}`;
+  }
 }
 
 function generateDiagram() {
-    const expression = document.getElementById('logicExpression').value.trim();
-    if (!expression) {
-        alert('Por favor, escribe una proposición lógica.');
-        return;
+  const input = document.getElementById("expression");
+  let expression = input.value;
+
+  // Normaliza la expresión
+  expression = normalizeExpression(expression);
+  input.value = expression;
+  
+
+  if (!expression) {
+    alert("Por favor, ingresa una expresión lógica.");
+    return;
+  }
+
+  const tree = parseExpression(expression);
+  ensureUniqueKeys(tree);
+  const diagramData = buildDiagramData(tree);
+
+  myDiagram.model = new go.GraphLinksModel(
+    diagramData.filter(d => d.key).map(d => ({ key: d.key, category: d.category })),
+    diagramData.filter(d => d.from && d.to)
+  );
+
+  generateTruthTable(expression);
+}
+
+
+function generateTruthTable(expression) {
+  // Convertir la expresión y variables a mayúsculas
+  expression = expression
+    .replace(/¬/g, 'NOT')
+    .replace(/∧/g, 'AND')
+    .replace(/∨/g, 'OR')
+    .replace(/\b[a-zA-Z]\b/g, match => match.toUpperCase());
+
+  const variables = Array.from(new Set(expression.match(/\b[A-Z]\b/g)));
+
+  const table = document.createElement("table");
+  const header = document.createElement("tr");
+
+  variables.forEach(v => {
+    const th = document.createElement("th");
+    th.textContent = v;
+    header.appendChild(th);
+  });
+
+  const resultHeader = document.createElement("th");
+  resultHeader.textContent = "Resultado";
+  header.appendChild(resultHeader);
+  table.appendChild(header);
+
+  const rows = 2 ** variables.length;
+  for (let i = 0; i < rows; i++) {
+    const row = document.createElement("tr");
+    const values = variables.map((v, index) => ((i >> (variables.length - index - 1)) & 1) === 1);
+
+    values.forEach(value => {
+      const cell = document.createElement("td");
+      cell.textContent = value ? "1" : "0";
+      row.appendChild(cell);
+    });
+
+    const resultCell = document.createElement("td");
+    const evaluatedExpression = expression
+      .replace(/\b[A-Z]\b/g, match => values[variables.indexOf(match)] ? "true" : "false")
+      .replace(/AND|&/g, "&&")
+      .replace(/OR|\|/g, "||")
+      .replace(/NOT|!/g, "!");
+    resultCell.textContent = eval(evaluatedExpression) ? "1" : "0";
+    row.appendChild(resultCell);
+
+    table.appendChild(row);
+  }
+
+  const truthTableDiv = document.getElementById("truthTableDiv");
+  truthTableDiv.innerHTML = "";
+  truthTableDiv.appendChild(table);
+}
+
+
+
+function downloadAsPNG() {
+  const canvas = myDiagram.makeImageData({ background: "white" });
+  const link = document.createElement("a");
+  link.href = canvas;
+  link.download = "diagram.png";
+  link.click();
+}
+
+function downloadAsPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  const canvas = myDiagram.makeImageData({ background: "white" });
+
+  const image = new Image();
+  image.src = canvas;
+
+  image.onload = function () {
+    doc.addImage(image, "PNG", 10, 10, 190, 100);
+
+    const truthTableDiv = document.getElementById("truthTableDiv");
+    if (truthTableDiv) {
+      const rows = truthTableDiv.querySelectorAll("tr");
+      let y = 120;
+
+      rows.forEach((row, rowIndex) => {
+        const cells = row.querySelectorAll("td, th");
+        let x = 10;
+        cells.forEach(cell => {
+          doc.text(cell.textContent, x, y);
+          x += 30;
+        });
+        y += 10;
+      });
     }
 
-    try {
-        validateExpression(expression);
-        const variables = Array.from(new Set(expression.match(/[a-z]/gi) || [])).sort();
-        const diagramContainer = document.getElementById('diagram');
-        diagramContainer.innerHTML = '';
-        renderDiagram(expression, variables, diagramContainer);
-    } catch (error) {
-        alert('Error al procesar la proposición lógica: ' + error.message);
-    }
+    doc.save("diagram_and_table.pdf");
+  };
 }
 
-function renderDiagram(expression, variables, container) {
-const operatorMap = {
-'∧': 'AND',
-'∨': 'OR',
-'¬': 'NOT',
-'⊕': 'XOR'
-};
+function insertSymbol(symbol) {
+  const input = document.getElementById("expression");
+  const start = input.selectionStart;
+  const end = input.selectionEnd;
+  const text = input.value;
 
-const elements = [];
-expression.split(/([∧∨¬⊕()])/g).filter(Boolean).forEach(token => {
-if (/[a-z]/i.test(token)) {
-    elements.push({ type: 'variable', value: token });
-} else if (operatorMap[token]) {
-    elements.push({ type: 'operator', value: operatorMap[token] });
-}
-});
+  // Inserta el símbolo en la posición del cursor
+  input.value = text.substring(0, start) + symbol + text.substring(end);
 
-const stack = [];
-const diagramRows = [];
+  // Normaliza la expresión
+  input.value = normalizeExpression(input.value);
 
-// Procesamos los elementos de la expresión
-elements.forEach((el, index) => {
-const row = document.createElement('div');
-row.className = 'diagram-section';
+  // Coloca el cursor al final del texto
+  input.selectionStart = input.selectionEnd = input.value.length;
 
-// Si el elemento es una variable, lo agregamos
-if (el.type === 'variable') {
-    const block = document.createElement('div');
-    block.className = 'gate';
-    block.textContent = el.value;
-    row.appendChild(block);
-    diagramRows.push(row);
-    stack.push(row);
-} 
-// Si el elemento es un operador, lo procesamos
-else if (el.type === 'operator') {
-    const block = document.createElement('div');
-    block.className = 'gate';
-    block.textContent = el.value;
-    row.appendChild(block);
-    diagramRows.push(row);
-    stack.push(row);
-}
-});
-
-// Conectar los elementos con líneas
-diagramRows.forEach((row, index) => {
-if (index < diagramRows.length - 1) {
-    const connector = document.createElement('div');
-    connector.className = 'connector';
-    container.appendChild(connector);
-}
-});
-
-diagramRows.forEach(row => container.appendChild(row));
-
-// Ahora agregamos las conexiones entre operadores y variables
-diagramRows.forEach((row, index) => {
-if (index < diagramRows.length - 1) {
-    const connector = document.createElement('div');
-    connector.className = 'horizontal-connector';
-    container.appendChild(connector);
-}
-});
+  // Mantén el foco en el campo de texto
+  input.focus();
 }
 
-async function downloadPDF() {
-    const pdf = new jspdf.jsPDF();
-
-    const truthTable = document.getElementById('truthTable');
-    const diagram = document.getElementById('diagram');
-
-    const truthTableCanvas = await html2canvas(truthTable);
-    const diagramCanvas = await html2canvas(diagram);
-
-    pdf.addImage(truthTableCanvas, 'PNG', 10, 10, 190, 60);
-    pdf.addPage();
-    pdf.addImage(diagramCanvas, 'PNG', 10, 10, 190, 120);
-
-    pdf.save('circuito-logico.pdf');
+function normalizeExpression(expression) {
+  return expression
+    .replace(/([A-Za-z])([¬∧∨()])/g, "$1 $2") // Añadir espacio entre variable y operador o paréntesis
+    .replace(/([¬∧∨()])([A-Za-z])/g, "$1 $2") // Añadir espacio entre operador o paréntesis y variable
+    .replace(/([¬∧∨()])([¬∧∨()])/g, "$1 $2") // Añadir espacio entre operadores o paréntesis consecutivos
+    .replace(/\s+/g, " ") // Reemplazar múltiples espacios por uno solo
+    .trim(); // Eliminar espacios iniciales y finales
 }
-
-async function downloadPNG() {
-    const container = document.getElementById('container');
-    const canvas = await html2canvas(container);
-    const link = document.createElement('a');
-    link.download = 'circuito-logico.png';
-    link.href = canvas.toDataURL();
-    link.click();
-}
-
-<script src="https://cdn.jsdelivr.net/npm/gojs/release/go-debug.js"></script>

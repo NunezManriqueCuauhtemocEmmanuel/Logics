@@ -57,7 +57,7 @@ const myDiagram = $(go.Diagram, "diagramDiv", {
 
 myDiagram.nodeTemplateMap.add("AND",
   $(go.Node, "Auto",
-    $(go.Shape, "Rectangle", { fill: "blue", strokeWidth: 0 }),
+    $(go.Shape, "Rectangle", { fill: "blue", strokeWidth: 0, }),
     $(go.TextBlock, { margin: 8 }, new go.Binding("text", "key"))
   )
 );

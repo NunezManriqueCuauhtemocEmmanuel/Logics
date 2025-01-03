@@ -110,7 +110,14 @@ body {
 }
 
 /*Navbar*/
-
+#diagramDiv {
+    width: 80%;
+    height: 600px;
+    border: 1px solid black;
+  }
+  #controls {
+    margin: 20px 0;
+  }
 /*Bienvenida*/
 
 .bienvenida{

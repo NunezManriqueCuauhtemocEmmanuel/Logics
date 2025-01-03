@@ -16,9 +16,9 @@
     <script defer src="./js/mostrar.js"></script>
     <script defer src="./js/fecha.js"></script>
     <script defer src="./js/sidebar.js"></script>
-    <script src="./js/logics.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script defer src="./js/logics.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/2.3.13/go.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 </head>
 <body>
 
@@ -65,33 +65,23 @@
         <h3>Usuario</h3>
     </section>
 
-    <div id="container">
-        <h1>LogicS</h1>
-        <div>
-            <label for="logicExpression">Escribe tu proposición lógica:</label>
-            <textarea id="logicExpression"></textarea>
-        </div>
-        <div class="buttons">
-            <button onclick="insertSymbol('∧')">AND (∧)</button>
-            <button onclick="insertSymbol('∨')">OR (∨)</button>
-            <button onclick="insertSymbol('¬')">NOT (¬)</button>
-            <button onclick="insertSymbol('⊕')">XOR (⊕)</button>
-            <button onclick="insertSymbol('(')">(</button>
-            <button onclick="insertSymbol(')')">)</button>
-        </div>
-        <button onclick="generateTable()">Generar Tabla de Verdad</button>
-        <button onclick="generateDiagram()">Generar Diagrama Lógico</button>
-        <button onclick="downloadPDF()">Descargar como PDF</button>
-        <button onclick="downloadPNG()">Descargar como PNG</button>
-        <div>
-            <h2>Tabla de Verdad</h2>
-            <div id="truthTable"></div>
-        </div>
-        <div>
-            <h2>Diagrama Lógico</h2>
-            <div id="diagram"></div>
-        </div>
+    <h1>Logics</h1>
+    <div id="controls">
+        <label for="expression">Expresión lógica:</label>
+        <input type="text" id="expression" placeholder="(A ∧ B) ∨ (¬C ∧ D)">
+
+<!-- Botones para insertar símbolos -->
+        <button onclick="insertSymbol('¬')">¬</button>
+        <button onclick="insertSymbol('∧')">∧</button>
+        <button onclick="insertSymbol('∨')">∨</button>
+
+        <button onclick="generateDiagram()">Generar Diagrama</button>
+        <button onclick="downloadAsPNG()">Descargar Diagrama como PNG</button>
+        <button onclick="downloadAsPDF()">Descargar Diagrama y Tabla como PDF</button>
     </div>
+    <div id="diagramDiv"></div>
+    <div id="truthTableDiv"></div>
+    <div id="simplifiedExpressionDiv" style="margin-top: 20px; font-weight: bold;"></div>
 
     <footer class="footer">
         <div class="pie">
