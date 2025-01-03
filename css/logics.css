@@ -1,0 +1,328 @@
+html {
+    scrollbar-color: #131835 transparent; /* thumb (primero) y track (segundo) */
+    scrollbar-width: medium; /* Opciones: auto | thin | none */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #EAECEE;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    cursor: url('../img/punteroAzul.png'), auto;
+}
+
+/*Header*/
+
+.header{
+    z-index: 10;
+    background: #EAECEE;
+    width: 100%;
+    font-family: "Glory", serif; 
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: fixed;
+    font-size: 18px;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+.header .data{
+    width: 30vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Glory", serif; 
+    font-weight: 100;
+    gap: 5px;
+}
+.header .data .ico{
+    margin-left: 7px;
+    margin-right: 7px;
+    color: #1E3A59;
+}
+.header .tada p{
+    font-weight: lighter;
+    margin-left: 15px;
+}
+
+.header .centro{
+    margin-top: 10px;
+    width: 30vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #1E3A59;
+}
+.header .centro .circulo{
+    margin-top: 5px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #1E3A59;;
+    animation: bounceInUp;
+    animation-duration: 2s;
+}
+
+.header .centro img{
+    margin-top: 5px;
+    color: #1E3A59;
+    animation: bounce;
+    animation-duration: 1s;
+    animation-delay: 0.9s;
+}
+
+.header .centro p{
+    margin-top: 5px;
+    color: #436fa0;
+    animation: zoomInDown;
+    animation-duration: 3.3s;
+    font-family: 'Hammersmith one', serif;
+}
+
+.header .busqueda{
+    width: 30vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1E3A59;
+}
+
+.header .busqueda button{
+    cursor: url('../img/mano.png'), auto;
+    background: #EAECEE;
+    transition: all 1s;
+}
+
+.header .busqueda button:hover{
+    color: #264268;
+    animation: colorChange 2s linear infinite;
+    transform: scale(1.2); 
+}
+
+.header .busqueda .header-toggle{
+    margin-left: 10px;
+    font-size: 1.5rem;
+    border: none;
+}
+
+/*Navbar*/
+
+/*Bienvenida*/
+
+.bienvenida{
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.bienvenida h1{
+    font-family: "Hammersmith One", serif;
+    font-size: 72px;
+    margin: 0;
+    text-align: center;
+}
+
+.bienvenida h3{
+    margin: 0;
+    font-family: "Hammersmith One", serif;
+    font-size: 32px;
+    font-weight: 200;
+    text-align: center;
+    color: #7d839c;
+}
+
+
+/*Footer*/
+
+.footer{
+    text-align: center;
+    width: 100%;
+    font-family: "Glory", serif; 
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #212329;
+    min-height: 100px;
+    box-shadow: 0px -9px 10px rgba(0, 0, 0, 0.5);
+    z-index: 200;
+}
+
+.pie{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 40px;
+}
+
+.social i{
+    color: #3a3e49;
+    font-size: 30px;
+    margin: 20px;
+    transition: all 0.5s;
+}
+
+.social i:hover{
+   transform: translateY(-10px) scale(1.2);
+}
+
+.social i:nth-child(1):hover,
+.social i:nth-child(7):hover{
+    color: rgb(255, 255, 255);   
+}
+
+.social i:nth-child(2):hover{
+    color: rgb(25, 99, 209);
+}
+
+.social i:nth-child(3):hover{
+    color: rgb(42, 127, 255); 
+    animation: colorChange 5s linear infinite;  
+}
+
+.social i:nth-child(4):hover{
+    animation: tiktok 1s alternate infinite;  
+}
+
+.social i:nth-child(5):hover{
+    color: #7289da;  
+}
+
+.social i:nth-child(6):hover{
+    color: #c4302b;  
+}
+
+.pie img{
+    margin: 20px 20px 30px 20px;
+    filter: drop-shadow(-3px 9px 9px rgb(0, 0, 0));
+}
+
+.links{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-wrap: wrap;
+    margin: 30px 0;
+    padding: 0;
+}
+
+.links li{
+    margin: 10px;
+    list-style: none;
+    width: 80px; 
+    text-align: center;
+}
+
+.links li a{
+    text-decoration: none;
+    color: #7d839c;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.pie p{
+    color: #b1b6ca;
+}
+
+.pie img{
+    filter: grayscale(120%);
+    transition: all 0.5s;
+    opacity: 50%;
+}
+
+.pie img:hover{
+    transform: scale(1.5);
+    opacity: 100%;
+    filter: grayscale(0%) drop-shadow(0px 5px 20px rgb(24, 91, 235));
+}
+
+@keyframes colorChange{
+    0%, 100%{
+        filter: hue-rotate(0deg);
+    }
+    50%{
+        filter: hue-rotate(360deg);
+    }
+}
+
+@keyframes tiktok{
+    0%{
+        color: #ff0050;
+    }
+
+    50%{
+        color: #000000;
+    }
+
+    100%{
+        color: #00f2ea;
+    }
+}
+
+@media screen and (max-width: 360px) {
+  
+    .sidebar {
+      width: max-content;
+    }
+
+    .side-information,
+    .sidebar_link span {
+      display: none;
+    }
+    .sidebar-user, 
+    .sidebar_list, 
+    .sidebar_actions {
+      justify-content: center;
+    }
+    .sidebar_user, 
+    .sidebar_link {
+      grid-template-columns: max-content;
+    }
+    .sidebar_user {
+      padding: 0;
+    }
+    .sidebar_link {
+      padding-inline: 2rem;
+    }
+    .sidebar_title {
+      padding-inline: .5rem;
+      margin-inline: auto;
+    }
+  }
+
+
+  @media screen and (min-width: 1150px) {
+    .header {
+      transition: padding .4s;
+    }
+
+  
+    /* Reduce sidebar */
+    .show-sidebar {
+      width: 90px;
+    }
+    .show-sidebar .sidebar_user {
+      padding-left: 1.25rem;
+    }
+    .show-sidebar .sidebar_title {
+      padding-left: 1.2rem;
+      margin-inline: auto;
+    }
+    .show-sidebar .side-information, 
+    .show-sidebar .sidebar_link span {
+      opacity: 0;
+    }
+  
+    
+}
+  

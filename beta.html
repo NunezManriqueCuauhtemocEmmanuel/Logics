@@ -1,348 +1,348 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Circuitos Lógicos</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        #container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        textarea {
-            width: 100%;
-            height: 100px;
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        th, td {
-            border: 1px solid black;
-            text-align: center;
-            padding: 5px;
-        }
-        .buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .buttons button {
-            padding: 10px;
-            font-size: 1em;
-            cursor: pointer;
-        }
-        #diagram {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .gate {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 10px;
-            border: 1px solid black;
-            border-radius: 5px;
-            min-width: 100px;
-            text-align: center;
-        }
-        .row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .connector {
-            width: 2px;
-            background-color: black;
-            height: 20px;
-            margin: -10px auto;
-        }
-        .horizontal-connector {
-            height: 2px;
-            background-color: black;
-            flex: 1;
-            margin: auto;
-        }
-        .diagram-section {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .output {
-            font-weight: bold;
-        }
-        .group-1 {
-            background-color: #add8e6;
-        }
-        .group-2 {
-            background-color: #90ee90;
-        }
-        .highlight-not {
-            color: red;
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/2.3.13/go.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+  <title>Generador de Circuitos Lógicos</title>
+  <style>
+    #diagramDiv {
+      width: 80%;
+      height: 600px;
+      border: 1px solid black;
+    }
+    #controls {
+      margin: 20px 0;
+    }
+    table {
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid black;
+    }
+    th, td {
+      padding: 5px 10px;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-    <div id="container">
-        <h1>LogicS</h1>
-        <div>
-            <label for="logicExpression">Escribe tu proposición lógica:</label>
-            <textarea id="logicExpression"></textarea>
-        </div>
-        <div class="buttons">
-            <button onclick="insertSymbol('∧')">AND (∧)</button>
-            <button onclick="insertSymbol('∨')">OR (∨)</button>
-            <button onclick="insertSymbol('¬')">NOT (¬)</button>
-            <button onclick="insertSymbol('⊕')">XOR (⊕)</button>
-            <button onclick="insertSymbol('(')">(</button>
-            <button onclick="insertSymbol(')')">)</button>
-        </div>
-        <button onclick="generateTable()">Generar Tabla de Verdad</button>
-        <button onclick="generateDiagram()">Generar Diagrama Lógico</button>
-        <button onclick="downloadPDF()">Descargar como PDF</button>
-        <button onclick="downloadPNG()">Descargar como PNG</button>
-        <div>
-            <h2>Tabla de Verdad</h2>
-            <div id="truthTable"></div>
-        </div>
-        <div>
-            <h2>Diagrama Lógico</h2>
-            <div id="diagram"></div>
-        </div>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script>
-        function insertSymbol(symbol) {
-            const textarea = document.getElementById('logicExpression');
-            textarea.value += symbol;
-            textarea.focus();
-        }
-
-        function validateExpression(expression) {
-            const validChars = /^[a-z∧∨¬⊕()\s]*$/i;
-            if (!validChars.test(expression)) {
-                throw new Error('La expresión contiene caracteres no válidos.');
-            }
-
-            const parentheses = expression.split('').reduce((count, char) => {
-                if (char === '(') count++;
-                if (char === ')') count--;
-                if (count < 0) throw new Error('Paréntesis desbalanceados.');
-                return count;
-            }, 0);
-
-            if (parentheses !== 0) {
-                throw new Error('Paréntesis desbalanceados.');
-            }
-        }
-
-        function generateTable() {
-            const expression = document.getElementById('logicExpression').value.trim();
-            if (!expression) {
-                alert('Por favor, escribe una proposición lógica.');
-                return;
-            }
-
-            try {
-                validateExpression(expression);
-                const variables = Array.from(new Set(expression.match(/[a-z]/gi) || [])).sort();
-                const truthTable = generateTruthTable(variables);
-                const parsedExpression = parseExpression(expression, variables);
-                renderTruthTable(truthTable, parsedExpression);
-            } catch (error) {
-                alert('Error al procesar la proposición lógica: ' + error.message);
-            }
-        }
-
-        function generateTruthTable(variables) {
-            const rows = 2 ** variables.length;
-            return Array.from({ length: rows }, (_, i) =>
-                variables.reduce((row, variable, index) => {
-                    row[variable] = (i >> (variables.length - 1 - index)) & 1;
-                    return row;
-                }, {})
-            );
-        }
-
-        function parseExpression(expression, variables) {
-            const symbolMap = {
-                '∧': '&&',
-                '∨': '||',
-                '¬': '!',
-                '⊕': '^'
-            };
-
-            let jsExpression = expression
-                .replace(/[a-z]/gi, (match) => `row['${match}']`)
-                .replace(/[∧∨¬⊕]/g, (match) => symbolMap[match]);
-
-            return { 
-                expression,
-                variables, 
-                evaluate: new Function('row', `return ${jsExpression};`) 
-            };
-        }
-
-        function renderTruthTable(truthTable, parsedExpression) {
-            const { variables, evaluate } = parsedExpression;
-            const tableContainer = document.getElementById('truthTable');
-            tableContainer.innerHTML = '';
-
-            const table = document.createElement('table');
-            const headerRow = document.createElement('tr');
-
-            variables.forEach(variable => {
-                const th = document.createElement('th');
-                th.textContent = variable;
-                headerRow.appendChild(th);
-            });
-
-            const resultHeader = document.createElement('th');
-            resultHeader.textContent = 'Salida';
-            headerRow.appendChild(resultHeader);
-            table.appendChild(headerRow);
-
-            truthTable.forEach(row => {
-                const tr = document.createElement('tr');
-
-                variables.forEach(variable => {
-                    const td = document.createElement('td');
-                    td.textContent = row[variable];
-                    tr.appendChild(td);
-                });
-
-                const resultCell = document.createElement('td');
-                try {
-                    resultCell.innerHTML = evaluate(row) ? '<span class="highlight-not">1</span>' : '0';
-                } catch {
-                    resultCell.textContent = 'Error';
-                }
-                tr.appendChild(resultCell);
-                table.appendChild(tr);
-            });
-
-            tableContainer.appendChild(table);
-        }
-
-        function generateDiagram() {
-            const expression = document.getElementById('logicExpression').value.trim();
-            if (!expression) {
-                alert('Por favor, escribe una proposición lógica.');
-                return;
-            }
-
-            try {
-                validateExpression(expression);
-                const variables = Array.from(new Set(expression.match(/[a-z]/gi) || [])).sort();
-                const diagramContainer = document.getElementById('diagram');
-                diagramContainer.innerHTML = '';
-                renderDiagram(expression, variables, diagramContainer);
-            } catch (error) {
-                alert('Error al procesar la proposición lógica: ' + error.message);
-            }
-        }
-
-        function renderDiagram(expression, variables, container) {
-    const operatorMap = {
-        '∧': 'AND',
-        '∨': 'OR',
-        '¬': 'NOT',
-        '⊕': 'XOR'
-    };
-
-    const elements = [];
-    expression.split(/([∧∨¬⊕()])/g).filter(Boolean).forEach(token => {
-        if (/[a-z]/i.test(token)) {
-            elements.push({ type: 'variable', value: token });
-        } else if (operatorMap[token]) {
-            elements.push({ type: 'operator', value: operatorMap[token] });
-        }
-    });
-
-    const stack = [];
-    const diagramRows = [];
+  <h1>Generador de Circuitos Lógicos</h1>
+  <div id="controls">
+    <label for="expression">Expresión lógica:</label>
+    <input type="text" id="expression" placeholder="(A ∧ B) ∨ (¬C ∧ D)">
     
-    // Procesamos los elementos de la expresión
-    elements.forEach((el, index) => {
-        const row = document.createElement('div');
-        row.className = 'diagram-section';
+    <!-- Botones para insertar símbolos -->
+    <button onclick="insertSymbol('¬')">¬</button>
+    <button onclick="insertSymbol('∧')">∧</button>
+    <button onclick="insertSymbol('∨')">∨</button>
+    
+    <button onclick="generateDiagram()">Generar Diagrama</button>
+    <button onclick="downloadAsPNG()">Descargar Diagrama como PNG</button>
+    <button onclick="downloadAsPDF()">Descargar Diagrama y Tabla como PDF</button>
+  </div>
+  
+  <div id="diagramDiv"></div>
+  <div id="truthTableDiv"></div>
+  <div id="simplifiedExpressionDiv" style="margin-top: 20px; font-weight: bold;"></div>
 
-        // Si el elemento es una variable, lo agregamos
-        if (el.type === 'variable') {
-            const block = document.createElement('div');
-            block.className = 'gate';
-            block.textContent = el.value;
-            row.appendChild(block);
-            diagramRows.push(row);
-            stack.push(row);
-        } 
-        // Si el elemento es un operador, lo procesamos
-        else if (el.type === 'operator') {
-            const block = document.createElement('div');
-            block.className = 'gate';
-            block.textContent = el.value;
-            row.appendChild(block);
-            diagramRows.push(row);
-            stack.push(row);
+  <script>
+    const $ = go.GraphObject.make;
+const myDiagram = $(go.Diagram, "diagramDiv", {
+  "undoManager.isEnabled": true,
+  layout: $(go.TreeLayout, { angle: 180, layerSpacing: 35 })
+});
+
+myDiagram.nodeTemplateMap.add("AND",
+  $(go.Node, "Auto",
+    $(go.Shape, "Rectangle", { fill: "blue", strokeWidth: 0 }),
+    $(go.TextBlock, { margin: 8 }, new go.Binding("text", "key"))
+  )
+);
+
+myDiagram.nodeTemplateMap.add("OR",
+  $(go.Node, "Auto",
+    $(go.Shape, "Rectangle", { fill: "green", strokeWidth: 0 }),
+    $(go.TextBlock, { margin: 8 }, new go.Binding("text", "key"))
+  )
+);
+
+myDiagram.nodeTemplateMap.add("NOT",
+  $(go.Node, "Spot",
+    $(go.Shape, "Triangle", {
+      fill: "red", // Color del triángulo
+      stroke: "black", // Borde del triángulo
+      desiredSize: new go.Size(70, 70), // Tamaño del triángulo
+      angle: 90 // Orientación del triángulo hacia la derecha
+    }),
+    $(go.TextBlock, {
+      margin: 0, 
+      font: "12px sans-serif", // Ajusta el tamaño y la fuente del texto
+      textAlign: "center", // Centra el texto
+      verticalAlignment: go.Spot.Center, // Centra el texto verticalmente
+      alignment: go.Spot.Center // Centra el texto dentro del triángulo
+    },
+      new go.Binding("text", "key"))
+  )
+);
+
+
+myDiagram.nodeTemplateMap.add("OUTPUT",
+  $(go.Node, "Auto",
+    $(go.Shape, "Rectangle", { fill: "yellow", strokeWidth: 0 }),
+    $(go.TextBlock, { margin: 8 }, new go.Binding("text", "key"))
+  )
+);
+
+function parseExpression(expr) {
+  // Mapear símbolos a operadores lógicos
+  expr = expr
+    .replace(/¬/g, 'NOT')
+    .replace(/∧/g, 'AND')
+    .replace(/∨/g, 'OR');
+
+  // Convertir todo a mayúsculas para unificar las variables
+  expr = expr.replace(/\b[a-zA-Z]\b/g, match => match.toUpperCase());
+
+  const operators = {
+    OR: 1, '|': 1,
+    AND: 2, '&': 2,
+    NOT: 4, '!': 4,
+  };
+
+  const isOperator = (token) => token in operators;
+  const precedence = (op) => operators[op];
+
+  const outputQueue = [];
+  const operatorStack = [];
+
+  const tokens = expr.match(/\w+|\(|\)|AND|OR|NOT|XOR|NAND|NOR|[&|^!]/g);
+
+  tokens.forEach((token) => {
+    if (isOperator(token)) {
+      while (
+        operatorStack.length > 0 &&
+        precedence(operatorStack[operatorStack.length - 1]) >= precedence(token) &&
+        operatorStack[operatorStack.length - 1] !== '('
+      ) {
+        outputQueue.push(operatorStack.pop());
+      }
+      operatorStack.push(token);
+    } else if (token === '(') {
+      operatorStack.push(token);
+    } else if (token === ')') {
+      while (operatorStack.length > 0 && operatorStack[operatorStack.length - 1] !== '(') {
+        outputQueue.push(operatorStack.pop());
+      }
+      operatorStack.pop();
+    } else {
+      outputQueue.push(token);
+    }
+  });
+
+  while (operatorStack.length > 0) {
+    outputQueue.push(operatorStack.pop());
+  }
+
+  function buildTree(queue) {
+    const stack = [];
+    queue.forEach((token) => {
+      if (isOperator(token)) {
+        const node = { key: token, category: token, children: [] };
+        if (token === 'NOT' || token === '!') {
+          node.children.push(stack.pop());
+        } else {
+          const right = stack.pop();
+          const left = stack.pop();
+          node.children.push(left, right);
         }
+        stack.push(node);
+      } else {
+        stack.push({ key: token, category: "", children: [] });
+      }
     });
+    const root = stack[0];
+    const outputNode = { key: "OUTPUT", category: "OUTPUT", children: [root] };
+    return outputNode;
+  }
 
-    // Conectar los elementos con líneas
-    diagramRows.forEach((row, index) => {
-        if (index < diagramRows.length - 1) {
-            const connector = document.createElement('div');
-            connector.className = 'connector';
-            container.appendChild(connector);
-        }
-    });
-
-    diagramRows.forEach(row => container.appendChild(row));
-
-    // Ahora agregamos las conexiones entre operadores y variables
-    diagramRows.forEach((row, index) => {
-        if (index < diagramRows.length - 1) {
-            const connector = document.createElement('div');
-            connector.className = 'horizontal-connector';
-            container.appendChild(connector);
-        }
-    });
+  return buildTree(outputQueue);
 }
 
-        async function downloadPDF() {
-            const pdf = new jspdf.jsPDF();
+function buildDiagramData(node, parentKey = null, diagramData = []) {
+  if (parentKey) {
+    diagramData.push({ from: parentKey, to: node.key });
+  }
 
-            const truthTable = document.getElementById('truthTable');
-            const diagram = document.getElementById('diagram');
+  if (!diagramData.some(d => d.key === node.key)) {
+    diagramData.push({ key: node.key, category: node.category });
+  }
 
-            const truthTableCanvas = await html2canvas(truthTable);
-            const diagramCanvas = await html2canvas(diagram);
+  node.children.forEach(child => buildDiagramData(child, node.key, diagramData));
+  return diagramData;
+}
 
-            pdf.addImage(truthTableCanvas, 'PNG', 10, 10, 190, 60);
-            pdf.addPage();
-            pdf.addImage(diagramCanvas, 'PNG', 10, 10, 190, 120);
+let uniqueNodeCounter = 1;
+function ensureUniqueKeys(node) {
+  if (node.children && node.children.length > 0) {
+    node.children.forEach(ensureUniqueKeys);
+  }
+  if (['AND', 'OR', 'NOT'].includes(node.key)) {
+    node.key = `${node.key}_${uniqueNodeCounter++}`;
+  }
+}
 
-            pdf.save('circuito-logico.pdf');
-        }
+function generateDiagram() {
+  const input = document.getElementById("expression");
+  let expression = input.value;
 
-        async function downloadPNG() {
-            const container = document.getElementById('container');
-            const canvas = await html2canvas(container);
-            const link = document.createElement('a');
-            link.download = 'circuito-logico.png';
-            link.href = canvas.toDataURL();
-            link.click();
-        }
-    </script>
+  // Normaliza la expresión
+  expression = normalizeExpression(expression);
+  input.value = expression;
+  
+
+  if (!expression) {
+    alert("Por favor, ingresa una expresión lógica.");
+    return;
+  }
+
+  const tree = parseExpression(expression);
+  ensureUniqueKeys(tree);
+  const diagramData = buildDiagramData(tree);
+
+  myDiagram.model = new go.GraphLinksModel(
+    diagramData.filter(d => d.key).map(d => ({ key: d.key, category: d.category })),
+    diagramData.filter(d => d.from && d.to)
+  );
+
+  generateTruthTable(expression);
+}
+
+
+function generateTruthTable(expression) {
+  // Convertir la expresión y variables a mayúsculas
+  expression = expression
+    .replace(/¬/g, 'NOT')
+    .replace(/∧/g, 'AND')
+    .replace(/∨/g, 'OR')
+    .replace(/\b[a-zA-Z]\b/g, match => match.toUpperCase());
+
+  const variables = Array.from(new Set(expression.match(/\b[A-Z]\b/g)));
+
+  const table = document.createElement("table");
+  const header = document.createElement("tr");
+
+  variables.forEach(v => {
+    const th = document.createElement("th");
+    th.textContent = v;
+    header.appendChild(th);
+  });
+
+  const resultHeader = document.createElement("th");
+  resultHeader.textContent = "Resultado";
+  header.appendChild(resultHeader);
+  table.appendChild(header);
+
+  const rows = 2 ** variables.length;
+  for (let i = 0; i < rows; i++) {
+    const row = document.createElement("tr");
+    const values = variables.map((v, index) => ((i >> (variables.length - index - 1)) & 1) === 1);
+
+    values.forEach(value => {
+      const cell = document.createElement("td");
+      cell.textContent = value ? "1" : "0";
+      row.appendChild(cell);
+    });
+
+    const resultCell = document.createElement("td");
+    const evaluatedExpression = expression
+      .replace(/\b[A-Z]\b/g, match => values[variables.indexOf(match)] ? "true" : "false")
+      .replace(/AND|&/g, "&&")
+      .replace(/OR|\|/g, "||")
+      .replace(/NOT|!/g, "!");
+    resultCell.textContent = eval(evaluatedExpression) ? "1" : "0";
+    row.appendChild(resultCell);
+
+    table.appendChild(row);
+  }
+
+  const truthTableDiv = document.getElementById("truthTableDiv");
+  truthTableDiv.innerHTML = "";
+  truthTableDiv.appendChild(table);
+}
+
+
+
+function downloadAsPNG() {
+  const canvas = myDiagram.makeImageData({ background: "white" });
+  const link = document.createElement("a");
+  link.href = canvas;
+  link.download = "diagram.png";
+  link.click();
+}
+
+function downloadAsPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  const canvas = myDiagram.makeImageData({ background: "white" });
+
+  const image = new Image();
+  image.src = canvas;
+
+  image.onload = function () {
+    doc.addImage(image, "PNG", 10, 10, 190, 100);
+
+    const truthTableDiv = document.getElementById("truthTableDiv");
+    if (truthTableDiv) {
+      const rows = truthTableDiv.querySelectorAll("tr");
+      let y = 120;
+
+      rows.forEach((row, rowIndex) => {
+        const cells = row.querySelectorAll("td, th");
+        let x = 10;
+        cells.forEach(cell => {
+          doc.text(cell.textContent, x, y);
+          x += 30;
+        });
+        y += 10;
+      });
+    }
+
+    doc.save("diagram_and_table.pdf");
+  };
+}
+
+function insertSymbol(symbol) {
+  const input = document.getElementById("expression");
+  const start = input.selectionStart;
+  const end = input.selectionEnd;
+  const text = input.value;
+
+  // Inserta el símbolo en la posición del cursor
+  input.value = text.substring(0, start) + symbol + text.substring(end);
+
+  // Normaliza la expresión
+  input.value = normalizeExpression(input.value);
+
+  // Coloca el cursor al final del texto
+  input.selectionStart = input.selectionEnd = input.value.length;
+
+  // Mantén el foco en el campo de texto
+  input.focus();
+}
+
+function normalizeExpression(expression) {
+  return expression
+    .replace(/([A-Za-z])([¬∧∨()])/g, "$1 $2") // Añadir espacio entre variable y operador o paréntesis
+    .replace(/([¬∧∨()])([A-Za-z])/g, "$1 $2") // Añadir espacio entre operador o paréntesis y variable
+    .replace(/([¬∧∨()])([¬∧∨()])/g, "$1 $2") // Añadir espacio entre operadores o paréntesis consecutivos
+    .replace(/\s+/g, " ") // Reemplazar múltiples espacios por uno solo
+    .trim(); // Eliminar espacios iniciales y finales
+}
+
+
+  </script>
 </body>
 </html>

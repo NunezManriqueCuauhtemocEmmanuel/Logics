@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogicS</title>
+    <link rel="stylesheet" href="./css/boton.css">
+    <link rel="stylesheet" href="./css/logics.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Glory:ital,wght@0,100..800;1,100..800&family=Hammersmith+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script defer src="./js/animaciones.js"></script>
+    <script defer src="./js/tabs.js"></script>
+    <script defer src="./js/mostrar.js"></script>
+    <script defer src="./js/fecha.js"></script>
+    <script defer src="./js/sidebar.js"></script>
+    <script src="./js/logics.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+    <div class="header">
+        <div class="data">
+          <div class="fecha" id="date-container">
+          </div>
+          <div id="ico-container" class="ico">
+          </div>
+          <div id="time-container" class="time">
+          </div>
+          <p> | 22* Sala Principal</p>
+        </div>
+        <div class="centro">
+            <img src="./img/Logics.png" width="30px">
+          <div class="circulo"></div>
+          <p>Logics</p>
+        </div>
+        <div class="busqueda">
+          <button class="header-toggle" id="header-toggle">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+    </div>
+    
+    <nav class="radiarbar" id="radiarbar">
+        <input type="checkbox" id="link" hidden>
+        <label for="link" class="link">
+          <i class="menu fa-solid fa-angles-left"></i>
+          <i class="close fa-solid fa-xmark"></i>
+        </label>
+    
+        <ul class="submenu">
+          <li><a href="index.html"><span>Inicio</span><div><i class="fa-solid fa-house"></i></div></a></li>
+          <li><a href="biblioteca.html"><span>Biblioteca</span><div><i class="fa-solid fa-book"></i></div></a></li>
+          <li><a href="logics.html"><span>LogicS</span><div><img src="./img/Logics.svg" width="20px"></div></a></li>
+          <li><a href=""><span>Servicio</span><div><i class="fa-regular fa-handshake"></i></div></a></li>
+          <li><a href=""><span>Dudas</span><div><i class="fa-solid fa-question"></i></div></a></li>
+        </ul>
+    </nav>
+
+    <section class="bienvenida">
+        <h1>Bienvenido</h1>
+        <h3>Usuario</h3>
+    </section>
+
+    <div id="container">
+        <h1>LogicS</h1>
+        <div>
+            <label for="logicExpression">Escribe tu proposición lógica:</label>
+            <textarea id="logicExpression"></textarea>
+        </div>
+        <div class="buttons">
+            <button onclick="insertSymbol('∧')">AND (∧)</button>
+            <button onclick="insertSymbol('∨')">OR (∨)</button>
+            <button onclick="insertSymbol('¬')">NOT (¬)</button>
+            <button onclick="insertSymbol('⊕')">XOR (⊕)</button>
+            <button onclick="insertSymbol('(')">(</button>
+            <button onclick="insertSymbol(')')">)</button>
+        </div>
+        <button onclick="generateTable()">Generar Tabla de Verdad</button>
+        <button onclick="generateDiagram()">Generar Diagrama Lógico</button>
+        <button onclick="downloadPDF()">Descargar como PDF</button>
+        <button onclick="downloadPNG()">Descargar como PNG</button>
+        <div>
+            <h2>Tabla de Verdad</h2>
+            <div id="truthTable"></div>
+        </div>
+        <div>
+            <h2>Diagrama Lógico</h2>
+            <div id="diagram"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="pie">
+            <div class="social">
+              <i class="fa-brands fa-github"></i>
+              <i class="fa-brands fa-facebook"></i>
+              <i class="fa-brands fa-instagram"></i>
+              <i class="fa-brands fa-tiktok"></i>
+              <i class="fa-brands fa-discord"></i>
+              <i class="fa-brands fa-youtube"></i>
+              <i class="fa-brands fa-x-twitter"></i>
+            </div>
+            <ul class="links">
+              <li><a href="#datos">Inicio</a></li>
+              <li><a href="#func">Funciones</a></li>
+              <li><a href="#guia">Guia</a></li>
+              <li><a href="#crear">Creación</a></li>
+              <li><a href="#paridad">Paridad</a></li>
+              <li><a href="#multi">Multimedia</a></li>
+            </ul>
+            <img src="./img/ManLetra.png" width="70px">
+            <p>@2025 | Todos los derechos reservados pertenecen a MGMC</p>
+        </div>
+    </footer>
+
+</body>
+</html>
