@@ -1175,8 +1175,7 @@ h2 {
 }
 
 @media (max-width: 935px){
-    .header .data,
-    .header .busqueda{
+    .header .data{
         display: none;
     }
 

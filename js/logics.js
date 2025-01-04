@@ -1,47 +1,36 @@
 const $ = go.GraphObject.make;
 const myDiagram = $(go.Diagram, "diagramDiv", {
   "undoManager.isEnabled": true,
-  layout: $(go.TreeLayout, { angle: 180, layerSpacing: 35 })
+  layout: $(go.TreeLayout, { angle: 0, layerSpacing: 35 })
 });
 
 myDiagram.nodeTemplateMap.add("AND",
   $(go.Node, "Auto",
-    $(go.Shape, "Rectangle", { fill: "blue", strokeWidth: 0, }),
-    $(go.TextBlock, { margin: 8 }, new go.Binding("text", "key"))
+    $(go.Shape, "Rectangle", { fill: "#EAECEE", stroke:"#11588c ", strokeWidth: 4}),
+    $(go.TextBlock, { margin: 8, font: "12px 'Hammersmith One', serif" }, new go.Binding("text", "key"))
   )
 );
 
 myDiagram.nodeTemplateMap.add("OR",
   $(go.Node, "Auto",
-    $(go.Shape, "Rectangle", { fill: "green", strokeWidth: 0 }),
-    $(go.TextBlock, { margin: 8 }, new go.Binding("text", "key"))
+    $(go.Shape, "Rectangle", { fill: "#EAECEE", stroke:"#167d23", strokeWidth: 4 }),
+    $(go.TextBlock, { margin: 8, font: "12px 'Hammersmith One', serif" }, new go.Binding("text", "key"))
   )
 );
 
 myDiagram.nodeTemplateMap.add("NOT",
   $(go.Node, "Spot",
-    $(go.Shape, "Triangle", {
-      fill: "red", // Color del triángulo
-      stroke: "black", // Borde del triángulo
-      desiredSize: new go.Size(70, 70), // Tamaño del triángulo
-      angle: 90 // Orientación del triángulo hacia la derecha
-    }),
-    $(go.TextBlock, {
-      margin: 0, 
-      font: "12px sans-serif", // Ajusta el tamaño y la fuente del texto
-      textAlign: "center", // Centra el texto
-      verticalAlignment: go.Spot.Center, // Centra el texto verticalmente
-      alignment: go.Spot.Center // Centra el texto dentro del triángulo
-    },
+    $(go.Shape, "Triangle", {fill: "#7d2424",stroke: "#7d2424",desiredSize: new go.Size(70, 70), angle: 90}),
+    $(go.TextBlock, {margin: 0, stroke:"white" ,font: "12px 'Hammersmith One', serif", textAlign: "center",verticalAlignment: go.Spot.Center, alignment: go.Spot.Center },
       new go.Binding("text", "key"))
   )
 );
 
 
-myDiagram.nodeTemplateMap.add("OUTPUT",
+myDiagram.nodeTemplateMap.add("SALIDA",
   $(go.Node, "Auto",
-    $(go.Shape, "Rectangle", { fill: "yellow", strokeWidth: 0 }),
-    $(go.TextBlock, { margin: 8 }, new go.Binding("text", "key"))
+    $(go.Shape, "Circle", {fill:"#EAECEE", stroke: "#a77e19 ", strokeWidth: 4, desiredSize: new go.Size(70, 70)}),
+    $(go.TextBlock, { margin: 8, font: "12px 'Hammersmith One', serif", stroke:"#132e4b" }, new go.Binding("text", "key"))
   )
 );
 
@@ -93,9 +82,9 @@ function parseExpression(expr) {
 
   while (operatorStack.length > 0) {
     outputQueue.push(operatorStack.pop());
-  }
+}
 
-  function buildTree(queue) {
+function buildTree(queue) {
     const stack = [];
     queue.forEach((token) => {
       if (isOperator(token)) {
@@ -113,7 +102,7 @@ function parseExpression(expr) {
       }
     });
     const root = stack[0];
-    const outputNode = { key: "OUTPUT", category: "OUTPUT", children: [root] };
+    const outputNode = { key: "SALIDA", category: "SALIDA", children: [root] };
     return outputNode;
   }
 
@@ -121,17 +110,17 @@ function parseExpression(expr) {
 }
 
 function buildDiagramData(node, parentKey = null, diagramData = []) {
-  if (parentKey) {
-    diagramData.push({ from: parentKey, to: node.key });
+    if (parentKey) {
+      diagramData.push({ from: node.key, to: parentKey }); // Cambiar "from" y "to"
+    }
+  
+    if (!diagramData.some(d => d.key === node.key)) {
+      diagramData.push({ key: node.key, category: node.category });
+    }
+  
+    node.children.forEach(child => buildDiagramData(child, node.key, diagramData));
+    return diagramData;
   }
-
-  if (!diagramData.some(d => d.key === node.key)) {
-    diagramData.push({ key: node.key, category: node.category });
-  }
-
-  node.children.forEach(child => buildDiagramData(child, node.key, diagramData));
-  return diagramData;
-}
 
 let uniqueNodeCounter = 1;
 function ensureUniqueKeys(node) {
@@ -166,62 +155,75 @@ function generateDiagram() {
     diagramData.filter(d => d.from && d.to)
   );
 
-  generateTruthTable(expression);
 }
 
-
-function generateTruthTable(expression) {
-  // Convertir la expresión y variables a mayúsculas
-  expression = expression
-    .replace(/¬/g, 'NOT')
-    .replace(/∧/g, 'AND')
-    .replace(/∨/g, 'OR')
-    .replace(/\b[a-zA-Z]\b/g, match => match.toUpperCase());
-
-  const variables = Array.from(new Set(expression.match(/\b[A-Z]\b/g)));
-
-  const table = document.createElement("table");
-  const header = document.createElement("tr");
-
-  variables.forEach(v => {
-    const th = document.createElement("th");
-    th.textContent = v;
-    header.appendChild(th);
-  });
-
-  const resultHeader = document.createElement("th");
-  resultHeader.textContent = "Resultado";
-  header.appendChild(resultHeader);
-  table.appendChild(header);
-
-  const rows = 2 ** variables.length;
-  for (let i = 0; i < rows; i++) {
-    const row = document.createElement("tr");
-    const values = variables.map((v, index) => ((i >> (variables.length - index - 1)) & 1) === 1);
-
-    values.forEach(value => {
-      const cell = document.createElement("td");
-      cell.textContent = value ? "1" : "0";
-      row.appendChild(cell);
+function generateTruthTable() {
+    const expression = document.getElementById("expression").value;
+  
+    // Normaliza la expresión
+    const normalizedExpression = expression
+      .replace(/¬/g, 'NOT')
+      .replace(/∧/g, 'AND')
+      .replace(/∨/g, 'OR')
+      .replace(/\b[a-zA-Z]\b/g, match => match.toUpperCase());
+  
+    const variables = Array.from(new Set(normalizedExpression.match(/\b[A-Z]\b/g)));
+  
+    if (variables.length === 0) {
+      alert("No se encontraron variables en la expresión. Por favor, verifica la entrada.");
+      return;
+    }
+  
+    const table = document.createElement("table");
+    const header = document.createElement("tr");
+  
+    // Genera los encabezados
+    variables.forEach(v => {
+      const th = document.createElement("th");
+      th.textContent = v;
+      header.appendChild(th);
     });
-
-    const resultCell = document.createElement("td");
-    const evaluatedExpression = expression
-      .replace(/\b[A-Z]\b/g, match => values[variables.indexOf(match)] ? "true" : "false")
-      .replace(/AND|&/g, "&&")
-      .replace(/OR|\|/g, "||")
-      .replace(/NOT|!/g, "!");
-    resultCell.textContent = eval(evaluatedExpression) ? "1" : "0";
-    row.appendChild(resultCell);
-
-    table.appendChild(row);
+  
+    const resultHeader = document.createElement("th");
+    resultHeader.textContent = "Resultado";
+    header.appendChild(resultHeader);
+    table.appendChild(header);
+  
+    // Genera las filas
+    const rows = 2 ** variables.length;
+    for (let i = 0; i < rows; i++) {
+      const row = document.createElement("tr");
+      const values = variables.map((v, index) => ((i >> (variables.length - index - 1)) & 1) === 1);
+  
+      values.forEach(value => {
+        const cell = document.createElement("td");
+        cell.textContent = value ? "1" : "0";
+        row.appendChild(cell);
+      });
+  
+      const resultCell = document.createElement("td");
+      const evaluatedExpression = normalizedExpression
+        .replace(/\b[A-Z]\b/g, match => values[variables.indexOf(match)] ? "true" : "false")
+        .replace(/AND|&/g, "&&")
+        .replace(/OR|\|/g, "||")
+        .replace(/NOT|!/g, "!");
+      try {
+        resultCell.textContent = eval(evaluatedExpression) ? "1" : "0";
+      } catch (error) {
+        resultCell.textContent = "Error";
+        console.error("Error al evaluar la expresión:", error);
+      }
+      row.appendChild(resultCell);
+  
+      table.appendChild(row);
+    }
+  
+    // Muestra la tabla
+    const truthTableDiv = document.getElementById("truthTableDiv");
+    truthTableDiv.innerHTML = ""; // Limpia cualquier tabla previa
+    truthTableDiv.appendChild(table);
   }
-
-  const truthTableDiv = document.getElementById("truthTableDiv");
-  truthTableDiv.innerHTML = "";
-  truthTableDiv.appendChild(table);
-}
-
+  
 
 
 function downloadAsPNG() {
@@ -290,3 +292,77 @@ function normalizeExpression(expression) {
     .replace(/\s+/g, " ") // Reemplazar múltiples espacios por uno solo
     .trim(); // Eliminar espacios iniciales y finales
 }
+
+function createVariableInputs(variables) {
+    const container = document.getElementById("variableInputs");
+    container.innerHTML = ""; // Limpia los inputs previos
+  
+    variables.forEach(variable => {
+      const label = document.createElement("label");
+      label.textContent = `${variable}: `;
+      label.style.marginRight = "10px";
+  
+      const select = document.createElement("select");
+      select.id = `var_${variable}`;
+      select.style.marginRight = "20px";
+  
+      const option0 = document.createElement("option");
+      option0.value = "0";
+      option0.textContent = "0";
+      select.appendChild(option0);
+  
+      const option1 = document.createElement("option");
+      option1.value = "1";
+      option1.textContent = "1";
+      select.appendChild(option1);
+  
+      container.appendChild(label);
+      container.appendChild(select);
+    });
+  }
+  
+  function calculateOutput() {
+    const expression = document.getElementById("expression").value;
+  
+    // Asegúrate de que las variables y expresión estén en mayúsculas
+    const normalizedExpression = expression
+      .replace(/¬/g, 'NOT')
+      .replace(/∧/g, 'AND')
+      .replace(/∨/g, 'OR')
+      .replace(/\b[a-zA-Z]\b/g, match => match.toUpperCase());
+  
+    const variables = Array.from(new Set(normalizedExpression.match(/\b[A-Z]\b/g)));
+    const values = {};
+  
+    // Obtén los valores de las variables
+    variables.forEach(variable => {
+      const select = document.getElementById(`var_${variable}`);
+      values[variable] = select ? parseInt(select.value) : 0;
+    });
+  
+    // Reemplaza las variables en la expresión con sus valores
+    let evaluatedExpression = normalizedExpression.replace(/\b[A-Z]\b/g, match => values[match] ? "true" : "false");
+  
+    // Convierte los operadores lógicos a equivalentes de JavaScript
+    evaluatedExpression = evaluatedExpression
+      .replace(/AND|&/g, "&&")
+      .replace(/OR|\|/g, "||")
+      .replace(/NOT|!/g, "!");
+  
+    try {
+      // Evalúa la expresión
+      const result = eval(evaluatedExpression) ? 1 : 0;
+      document.getElementById("outputValue").textContent = result;
+    } catch (error) {
+      document.getElementById("outputValue").textContent = "Error";
+      console.error("Error al evaluar la expresión:", error);
+    }
+  }
+  
+  // Generar dinámicamente los inputs para las variables al cargar la expresión
+  document.getElementById("expression").addEventListener("change", () => {
+    const expression = document.getElementById("expression").value;
+    const variables = Array.from(new Set(expression.match(/\b[A-Za-z]\b/g))).map(v => v.toUpperCase());
+    createVariableInputs(variables);
+  });
+  

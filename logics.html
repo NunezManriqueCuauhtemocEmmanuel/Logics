@@ -35,7 +35,7 @@
         <div class="centro">
             <img src="./img/Logics.png" width="30px">
           <div class="circulo"></div>
-          <p>Logics</p>
+          <p>LogicS</p>
         </div>
         <div class="busqueda">
           <button class="header-toggle" id="header-toggle">
@@ -65,23 +65,37 @@
         <h3>Usuario</h3>
     </section>
 
-    <h1>Logics</h1>
-    <div id="controls">
-        <label for="expression">Expresión lógica:</label>
-        <input type="text" id="expression" placeholder="(A ∧ B) ∨ (¬C ∧ D)">
+    <section class="logics">
+        <h1>LogicS</h1>
+        <div id="controls">
+            <div class="escribe">
+                <label for="expression">Expresión lógica:</label>
+                <input type="text" id="expression" placeholder="LogicS">
+            </div>
 
 <!-- Botones para insertar símbolos -->
-        <button onclick="insertSymbol('¬')">¬</button>
-        <button onclick="insertSymbol('∧')">∧</button>
-        <button onclick="insertSymbol('∨')">∨</button>
+            <button onclick="insertSymbol('¬')">¬</button>
+            <button onclick="insertSymbol('∧')">∧</button>
+            <button onclick="insertSymbol('∨')">∨</button>
 
-        <button onclick="generateDiagram()">Generar Diagrama</button>
-        <button onclick="downloadAsPNG()">Descargar Diagrama como PNG</button>
-        <button onclick="downloadAsPDF()">Descargar Diagrama y Tabla como PDF</button>
-    </div>
-    <div id="diagramDiv"></div>
-    <div id="truthTableDiv"></div>
-    <div id="simplifiedExpressionDiv" style="margin-top: 20px; font-weight: bold;"></div>
+            <button onclick="generateDiagram()">Generar Diagrama</button>
+            <button onclick="downloadAsPNG()">Descargar Diagrama como PNG</button>
+            <button onclick="downloadAsPDF()">Descargar Diagrama y Tabla como PDF</button>
+        </div>
+        <div id="diagramDiv"></div>
+        <div id="variableInputs" style="margin-bottom: 20px;">
+            <!-- Aquí se generarán dinámicamente los selectores para las variables -->
+        </div>
+        <div id="outputDiv" style="margin-bottom: 20px;">
+            <strong>Salida:</strong> <span id="outputValue">N/A</span>
+        </div>
+        <button onclick="calculateOutput()">Calcular salida</button>
+        <div id="truthTableContainer" style="margin-bottom: 20px;">
+            <button onclick="generateTruthTable()">Generar tabla de verdad</button>
+            <div id="truthTableDiv"></div>
+        </div>
+        <div id="simplifiedExpressionDiv" style="margin-top: 20px; font-weight: bold;"></div>
+    </section>
 
     <footer class="footer">
         <div class="pie">
