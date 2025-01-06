@@ -4,17 +4,31 @@ const myDiagram = $(go.Diagram, "diagramDiv", {
   layout: $(go.TreeLayout, { angle: 0, layerSpacing: 35 })
 });
 
+
+
 myDiagram.nodeTemplateMap.add("AND",
-  $(go.Node, "Auto",
-    $(go.Shape, "Rectangle", { fill: "#EAECEE", stroke:"#11588c ", strokeWidth: 4}),
-    $(go.TextBlock, { margin: 8, font: "12px 'Hammersmith One', serif" }, new go.Binding("text", "key"))
-  )
+    $(go.Node, "Spot",
+      { angle: 0 }, // Ángulo inicial (puedes ajustarlo a 90, 180, etc. para rotar)
+      $(go.Panel, "Auto",
+        $(go.Shape, {
+          geometryString: "F M0 0 L0 50 L30 50 L30 0 L0 0 M30 0 A20 20 0 0 1 30 50", // Forma clásica de la compuerta AND
+          fill: "#11588c ", // Color de fondo
+          stroke: "#11588c ", // Color del borde
+          strokeWidth: 4
+        }),
+        $(go.TextBlock, {
+          margin: 8,
+          font: "12px sans-serif",
+          stroke: "white"
+        }, new go.Binding("text", "key"))
+      )
+    )
 );
 
 myDiagram.nodeTemplateMap.add("OR",
   $(go.Node, "Auto",
-    $(go.Shape, "Rectangle", { fill: "#EAECEE", stroke:"#167d23", strokeWidth: 4 }),
-    $(go.TextBlock, { margin: 8, font: "12px 'Hammersmith One', serif" }, new go.Binding("text", "key"))
+    $(go.Shape, "Rectangle", { fill: "#167d23", stroke:"#167d23", strokeWidth: 4 }),
+    $(go.TextBlock, { margin: 8, font: "12px 'Hammersmith One', serif", stroke:"white" }, new go.Binding("text", "key"))
   )
 );
 
@@ -29,8 +43,8 @@ myDiagram.nodeTemplateMap.add("NOT",
 
 myDiagram.nodeTemplateMap.add("SALIDA",
   $(go.Node, "Auto",
-    $(go.Shape, "Circle", {fill:"#EAECEE", stroke: "#a77e19 ", strokeWidth: 4, desiredSize: new go.Size(70, 70)}),
-    $(go.TextBlock, { margin: 8, font: "12px 'Hammersmith One', serif", stroke:"#132e4b" }, new go.Binding("text", "key"))
+    $(go.Shape, "Circle", {fill:"#a77e19", stroke: "#a77e19 ", strokeWidth: 4, desiredSize: new go.Size(50, 50)}),
+    $(go.TextBlock, { margin: 8, font: "10px 'Hammersmith One', serif", stroke:"#ffffff" }, new go.Binding("text", "key"))
   )
 );
 
@@ -185,7 +199,7 @@ function generateTruthTable() {
     });
   
     const resultHeader = document.createElement("th");
-    resultHeader.textContent = "Resultado";
+    resultHeader.textContent = "Salida";
     header.appendChild(resultHeader);
     table.appendChild(header);
   
@@ -300,22 +314,35 @@ function createVariableInputs(variables) {
     variables.forEach(variable => {
       const label = document.createElement("label");
       label.textContent = `${variable}: `;
-      label.style.marginRight = "10px";
-  
+      label.style.fontFamily = "'Hammersmith one',serif"
+      label.style.margin = "10px";
+      label.style.fontWeight = "bold"; // Estilo adicional para el label
+      label.style.color = "#333"; // Cambia el color del texto del label
+      label.style.fontSize = "14px"; // Ajusta el tamaño de la fuente
+      label.style.display = "inline-block"; // Asegura que el label se quede en una línea con el select
+    
       const select = document.createElement("select");
       select.id = `var_${variable}`;
       select.style.marginRight = "20px";
-  
+      select.style.border = "none";
+      select.style.borderRadius = "10px";
+      select.style.width = "40px";
+      select.style.height = "40px";
+      select.style.textAlign = "center";
+      select.style.background = "#131835";
+      select.style.color = "white";
+      select.style.boxShadow = "0px 0px 7px rgba(0, 0, 0, 0.7)";
+    
       const option0 = document.createElement("option");
       option0.value = "0";
       option0.textContent = "0";
       select.appendChild(option0);
-  
+    
       const option1 = document.createElement("option");
       option1.value = "1";
       option1.textContent = "1";
       select.appendChild(option1);
-  
+    
       container.appendChild(label);
       container.appendChild(select);
     });
@@ -366,3 +393,47 @@ function createVariableInputs(variables) {
     createVariableInputs(variables);
   });
   
+  function validateExpressionInput(event) {
+    const allowedCharacters = /^[A-Za-z¬∧∨() ]*$/; // Letras, símbolos permitidos y paréntesis
+    const input = event.target.value;
+  
+    // Elimina cualquier carácter no permitido
+    if (!allowedCharacters.test(input)) {
+      event.target.value = input.replace(/[^A-Za-z¬∧∨() ]/g, '');
+      alert("Solo se permiten letras, los símbolos ¬∧∨ y los paréntesis.");
+    }
+  }
+  
+
+  function loadCSV(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const lines = e.target.result.split('\n').map(line => line.trim());
+        const select = document.getElementById('expressionSelect');
+        select.innerHTML = '<option value="">--Selecciona una expresión--</option>';
+
+        lines.forEach((line, index) => {
+            if (line) {
+                const option = document.createElement('option');
+                option.value = line;
+                option.textContent = `Expresión ${index + 1}: ${line}`;
+                select.appendChild(option);
+            }
+        });
+    };
+    reader.readAsText(file);
+}
+
+function setExpression() {
+    const select = document.getElementById('expressionSelect');
+    const input = document.getElementById('expression');
+    input.value = select.value;
+}
+
+function insertSymbol(symbol) {
+    const input = document.getElementById('expression');
+    input.value += symbol;
+}

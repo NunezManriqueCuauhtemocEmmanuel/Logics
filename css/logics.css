@@ -9,7 +9,7 @@ body {
     background: #EAECEE;
     box-sizing: border-box;
     overflow-x: hidden;
-    cursor: url('../img/punteroAzul.png'), auto;
+    cursor: url("../img/puntero16.png"), auto;
 }
 
 /*Header*/
@@ -110,42 +110,7 @@ body {
 }
 
 /*Navbar*/
-#diagramDiv {
-    width: 60%;
-    height: 600px;
-    background: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.205);
-}
 
-#controls {
-    margin: 10px 0;
-}
-
-#expression{
-    border: none;
-    padding: 5px;
-    border-radius: 10px;
-}
-
-.escribe{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Hammersmith one',serif;
-    margin: 10px;
-}
-
-input[type="text"]::placeholder {
-    color: #13193551;
-    font-family: "Hammersmith One", serif;
-}
-
-input[type="text"]:focus {
-    border-color: #0078d7;
-    color: NONE;
-    outline: none;
-  }
 /*Bienvenida*/
 
 .bienvenida{
@@ -183,6 +148,193 @@ input[type="text"]:focus {
     flex-direction: column;
 }
 
+#diagramDiv {
+    width: 60%;
+    height: 400px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.205);
+}
+
+#controls {
+    margin: 10px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#expression{
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-family: 'Hammersmith one',serif;
+}
+
+.escribe{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Hammersmith one',serif;
+    margin: 10px;
+    flex-direction: column;
+    width: 100%;
+}
+
+input{
+    width: 30%;
+    margin: 5px;
+}
+
+input[type="text"]::placeholder {
+    color: #13193551;
+    font-family: "Hammersmith One", serif;
+    text-align: center;
+}
+
+input[type="text"]:focus {
+    border-color: #0078d7;
+    color: NONE;
+    outline: none;
+    text-align: center;
+}
+
+.simbolo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.simbolo button{
+    position: relative;
+    width: 40px;
+    height: 40px;
+    color: white;
+    border: none;
+    background: #131835;
+    border-radius: 10px;
+    font-weight: 700;
+    transition: all 0.4s;
+    cursor: url('../img/mano.png'), auto;
+}
+
+.simbolo button:hover{
+    transform: scale(1.2);
+    background: white;
+    color: #131835;
+}
+
+.simbolo button:nth-child(4){
+    width: 110px;
+}
+
+.CSV{
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#variableInputs{
+    margin: 20px;
+}
+
+#outputDiv{
+    font-family: 'Hammersmith one', serif;
+}
+
+.salida{
+    font-family: 'Hammersmith one', serif;
+    background: #131835;
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    transition: all 0.4s;
+    margin: 20px;
+    cursor: url('../img/mano.png'), auto;
+}
+
+.salida:hover{
+    color: #131835;
+    background: white;
+    transform: scale(1.2);
+}
+
+table {
+    border-collapse: collapse;
+    margin-top: 20px;
+    width: 50vw;
+}
+
+th, td {
+    padding: 5px 10px;
+    text-align: center;
+}
+
+th{
+    background: #212329;
+    color: white;
+}
+
+.descargas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+#truthTableContainer{
+    font-family: 'Hammersmith one', serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+#truthTableContainer button{
+    border: none;
+    background: white;
+    font-family: 'Hammersmith one', serif;
+    padding: 10px;
+    border-radius: 10px;
+    color: #131835;
+    margin: 20px;
+    transition: all 0.4s;
+    cursor: url('../img/mano.png'), auto;
+}
+
+#truthTableContainer button:hover{
+    color: white;
+    background: #131835;
+    transform: scale(1.1);
+}
+
+.descargas button{
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 20px;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.descargas button:nth-child(1){
+    background: #131835;
+}
+
+.descargas button:nth-child(2){
+    background: #ad0b00;
+}
 
 /*Footer*/
 

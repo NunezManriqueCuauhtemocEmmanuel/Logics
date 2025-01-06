@@ -17,8 +17,8 @@
     <script defer src="./js/fecha.js"></script>
     <script defer src="./js/sidebar.js"></script>
     <script defer src="./js/logics.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/2.3.13/go.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gojs/release/go-debug.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 </head>
 <body>
 
@@ -69,32 +69,53 @@
         <h1>LogicS</h1>
         <div id="controls">
             <div class="escribe">
-                <label for="expression">Expresión lógica:</label>
-                <input type="text" id="expression" placeholder="LogicS">
+                <label for="expression">Expresión lógica</label>
+                <input type="text" id="expression" placeholder="LogicS" oninput="validateExpressionInput(event)"> 
+            </div>
+            <div class="simbolo">
+                <button onclick="insertSymbol('¬')">¬</button>
+                <button onclick="insertSymbol('∧')">∧</button>
+                <button onclick="insertSymbol('∨')">∨</button>
+                <button onclick="generateDiagram()"><i class="fa-solid fa-diagram-project"></i> Generar</button>
             </div>
 
-<!-- Botones para insertar símbolos -->
-            <button onclick="insertSymbol('¬')">¬</button>
-            <button onclick="insertSymbol('∧')">∧</button>
-            <button onclick="insertSymbol('∨')">∨</button>
+            <div class="CSV">
+                <div>
+                    <label for="fileInput">Cargar expresiones (CSV)</label>
+                    <input type="file" id="fileInput" accept=".csv" onchange="loadCSV(event)">
+                </div>
+    
+                <div>
+                    <label for="expressionSelect">Seleccionar expresión</label>
+                    <select id="expressionSelect" onchange="setExpression()">
+                        <option value="">--Selecciona una expresión--</option>
+                    </select>
+                </div>
+            </div>
 
-            <button onclick="generateDiagram()">Generar Diagrama</button>
-            <button onclick="downloadAsPNG()">Descargar Diagrama como PNG</button>
-            <button onclick="downloadAsPDF()">Descargar Diagrama y Tabla como PDF</button>
+
         </div>
+
         <div id="diagramDiv"></div>
+
         <div id="variableInputs" style="margin-bottom: 20px;">
-            <!-- Aquí se generarán dinámicamente los selectores para las variables -->
         </div>
-        <div id="outputDiv" style="margin-bottom: 20px;">
+
+        <div id="outputDiv">
             <strong>Salida:</strong> <span id="outputValue">N/A</span>
         </div>
-        <button onclick="calculateOutput()">Calcular salida</button>
+
+        <button onclick="calculateOutput()" class="salida">Cargar salida</button>
+
         <div id="truthTableContainer" style="margin-bottom: 20px;">
             <button onclick="generateTruthTable()">Generar tabla de verdad</button>
             <div id="truthTableDiv"></div>
         </div>
-        <div id="simplifiedExpressionDiv" style="margin-top: 20px; font-weight: bold;"></div>
+
+        <div class="descargas">
+            <button onclick="downloadAsPNG()"><i class="fa-solid fa-file-image"></i></button>
+            <button onclick="downloadAsPDF()"><i class="fa-solid fa-file-pdf"></i></button>
+        </div>
     </section>
 
     <footer class="footer">
