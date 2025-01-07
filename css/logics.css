@@ -130,7 +130,7 @@ body {
 }
 
 .bienvenida h3{
-    margin: 0;
+    margin: 10px;
     font-family: "Hammersmith One", serif;
     font-size: 32px;
     font-weight: 200;
@@ -182,7 +182,7 @@ body {
     width: 100%;
 }
 
-input{
+.escribe input{
     width: 30%;
     margin: 5px;
 }
@@ -236,6 +236,58 @@ input[type="text"]:focus {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.CSV div{
+    font-family: 'Hammersmith one', serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.CSV div input[type="file"]::file-selector-button {
+    border: none;
+    background: #131835;
+    color: white;
+    font-family: 'Hammersmith one',serif;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: url('../img/mano.png'), auto;
+    transition: all 0.4s;
+}
+
+.CSV div input[type="file"]::file-selector-button:hover{
+    background: white;
+    color: #131835;
+    transform: scale(0.9);
+}
+
+#fileInput{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#expressionSelect{
+    border: none;
+    background: #131835;
+    color: white;
+    font-family: 'Hammersmith one',serif;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: url('../img/mano.png'), auto;
+    transition: all 0.4s;
+}
+
+#expressionSelect:hover{
+    background: white;
+    color: #131835;
+    transform: scale(0.9);
 }
 
 #variableInputs{
@@ -326,6 +378,8 @@ th{
     justify-content: center;
     align-items: center;
     display: flex;
+    transition: all 0.4s;
+    cursor: url('../img/mano.png'), auto;
 }
 
 .descargas button:nth-child(1){
@@ -334,6 +388,18 @@ th{
 
 .descargas button:nth-child(2){
     background: #ad0b00;
+}
+
+.descargas button:nth-child(1):hover{
+    color: #131835;
+    background: white;
+    transform: scale(1.1);
+}
+
+.descargas button:nth-child(2):hover{
+    color: #ad0b00;
+    background: white;
+    transform: scale(1.1);
 }
 
 /*Footer*/
@@ -522,4 +588,16 @@ th{
   
     
 }
-  
+
+.hidden{
+    opacity: 0;
+    transition: all 1s;
+    filter: blur(5px);
+    transform: scale(0);
+}
+.show{
+    opacity: 1;
+    transition: all 1s;
+    filter: blur(0px);
+    transform: scale(1);
+}
