@@ -50,10 +50,10 @@
 
       <ul class="submenu">
         <li><a href="carga.html?next=index.html"><span>Inicio</span><div><i class="fa-solid fa-house"></i></div></a></li>
-      <li><a href="carga.html?next=biblioteca.html"><span>Actualizaciones y errores</span><div><i class="fa-solid fa-book"></i></div></a></li>
-      <li><a href="carga.html?next=logics.html"><span>LogicS</span><div><img src="./img/Logics.svg" width="20px"></div></a></li>
-      <li><a href="carga.html?next=servicios.html"><span>Servicio</span><div><i class="fa-regular fa-handshake"></i></div></a></li>
-      <li><a href="carga.html?next=instrucciones.html"><span>Dudas</span><div><i class="fa-solid fa-question"></i></div></a></li>
+        <li><a href="carga.html?next=biblioteca.html"><span>Biblioteca</span><div><i class="fa-solid fa-book"></i></div></a></li>
+        <li><a href="carga.html?next=logics.html"><span>LogicS</span><div><img src="./img/Logics.svg" width="20px"></div></a></li>
+        <li><a href="carga.html?next=servicios.html"><span>Servicio</span><div><i class="fa-regular fa-handshake"></i></div></a></li>
+        <li><a href="carga.html?next=instrucciones.html"><span>Dudas</span><div><i class="fa-solid fa-question"></i></div></a></li>
       </ul>
     </nav>
 
@@ -97,18 +97,26 @@
                         <h4>Uso de palabras como conector logico</h4>
                         <p>
                             El uso de palabras como conector logico es compatible en la caja de texto, el simulador funcionará correctamente si se colocan las pablabras 
-                            AND, OR Y NOT, tomando en cuanta que al igual que con el simbolo not, la palabra debe colocarse atras de la variable
+                            AND, OR Y NOT, tomando en cuanta que al igual que con el simbolo not, la palabra debe colocarse atras de la variable, por ejemplo "NOT A"
                         </p>
                     </div>
                 </li>
                 <li>
                     <div>
                         <h4>Parentesis</h4>
+                        <p>
+                            El simulador actuará depende a la jerarquia de operadores dentro de la expresion, es decir, se respetará el uso de parentesis dentro de la caja de texto,
+                            por ejemplo "(A AND B) OR (A AND C)" ó "(A ∧ B) ∨ (A ∧ C)".
+                        </p>
                     </div>
                 </li>
                 <li>
                     <div>
                         <h4>CSV</h4>
+                        <p>
+                            Para el uso del archivo CSV, las anteriores instrucciones deben seguirse tal cual, la expresión debe estar escrita en la columna "A" del editor de textos
+                            de preferencia; Importante, solo se aceptan datos en esa columna, asi como unicamente archivos csv.
+                        </p>
                     </div>
                 </li>
             </ul>
@@ -122,16 +130,27 @@
                 <li>
                     <div>
                         <h4>Creador de diagramas de circuito lógico</h4>
+                        <p>El diagrama aparecerá siempre y cuando la expresión este correctamente escrita segun las instrucciones anteriores;
+                            las compuertas pertenecientes a la expresion logica se podran acomodar a gusto del usuario, sin embrago apareceran con un orden predeterminado
+                            iniciando de izquierda a derecha por las variables y cerrando con una salida, este diagrama se puede descargar en png y pdf. 
+                        </p>
                     </div>
                 </li>
                 <li>
                     <div>
                         <h4>Simulador de Salida</h4>
+                        <p>
+                            El simulador de salida se utiliza para obtener la salida de valores especificos de las variables de una expresión, debajo del creador de diagramas,
+                            apareceran las variables y una caja para definir su valor, cierto o falso (1 ó 0). 
+                        </p>
                     </div>
                 </li>
                 <li>
                     <div>
                         <h4>Tabla de verdad</h4>
+                        <p>Esta se generará siempre y cuando la expresion haya sido escrita correctamente, se creara una tabla de verdad que mostrara todas sus salidas y combinaciones de valores 
+                            para las variables, esta tabla se podra descargar en formato pdf y csv.
+                        </p>
                     </div>
                 </li>
             </ul>

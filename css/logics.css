@@ -157,14 +157,18 @@ body {
 }
 
 .ayuda div{
-    width: 70%;
+    width: 60%;
     font-family: "Glory", serif;
     text-align: center;
     font-size: 16px;
+    background: #212329;
+    color: white;
+    padding: 30px;
+    border-radius: 30px;
 }
 
 .ayuda p{
-    width: 70%;
+    width: 60%;
     font-family: "Hammersmith One", serif;
     text-align: center;
     font-size: 16px;
