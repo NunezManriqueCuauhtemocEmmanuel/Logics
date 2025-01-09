@@ -220,3 +220,73 @@
   El uso de simbolos logicos es compatible en la caja de texto, el simulador funcionara correctamente si se colocan los simbolos ∨, ∧, ¬ ;cabe resaltar que para el uso de "¬", este simbolo se debe colocar antes de la variable, por ejemplo "¬A". Los simbolos se pueden 
   colocar para mayor facilidad de los usuarios con los botones de ayuda debajo de la caja de texto.
 </p>
+
+### Uso de palabras como conector
+
+<p>
+  El uso de palabras como conector logico es compatible en la caja de texto, el simulador funcionará correctamente si se colocan las pablabras AND, OR Y NOT, tomando en cuanta que al igual que con el simbolo not, la palabra debe colocarse atras de la variable, por 
+  ejemplo "NOT A"
+</p>
+
+### Parentesis
+
+<p>
+  El simulador actuará depende a la jerarquia de operadores dentro de la expresion, es decir, se respetará el uso de parentesis dentro de la caja de texto, por ejemplo "(A AND B) OR (A AND C)" ó "(A ∧ B) ∨ (A ∧ C)".
+</p>
+
+### CSV
+
+<p>
+  Para el uso del archivo CSV, las anteriores instrucciones deben seguirse tal cual, la expresión debe estar escrita en la columna "A" del editor de textos de preferencia; Importante, solo se aceptan datos en esa columna, asi como unicamente archivos csv.
+</p>
+
+### Simulador
+
+<p>
+  El simulador LogicS cuenta con tres funciones principales
+</p>
+
+<ul>
+  <li>
+    Creador de diagramas 
+  </li>
+  <li>
+    Simulador de Salida
+  </li>
+  <li>
+    Tabla de verdad
+  </li>
+</ul>
+
+### Creador de diagramas
+
+<p>
+  El diagrama aparecerá siempre y cuando la expresión este correctamente escrita segun las instrucciones anteriores; las compuertas pertenecientes a la expresion logica se podran acomodar a gusto del usuario, sin embrago apareceran con un orden predeterminado iniciando 
+  de izquierda a derecha por las variables y cerrando con una salida, este diagrama se puede descargar en png y pdf.
+</p>
+
+### Simulador de Salida
+
+<p>
+  El simulador de salida se utiliza para obtener la salida de valores especificos de las variables de una expresión, debajo del creador de diagramas, apareceran las variables y una caja para definir su valor, cierto o falso (1 ó 0).
+</p>
+
+### Tabla de verdad
+
+<p>
+  Esta se generará siempre y cuando la expresion haya sido escrita correctamente, se creara una tabla de verdad que mostrara todas sus salidas y combinaciones de valores para las variables, esta tabla se podra descargar en formato pdf y csv.
+</p>
+
+
+<hr>
+
+## Conocenos
+
+<p>
+  Este trabajo fue creado por Nuñez Manrique Cuauhtemoc Emmanuel, todo el diseño, idea y nombre de LogicS pertenecen al creador, puedes encontrar este y  más proyectos en el repositorio de Github del creador
+</p>
+
+![ManLetra](https://github.com/user-attachments/assets/775231de-d287-452c-927e-f3c2c48b8e04)
+
+_Derechos reservados de MGMC | 2025_
+
