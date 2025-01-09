@@ -397,12 +397,21 @@ function createVariableInputs(variables) {
     const allowedCharacters = /^[A-Za-z¬∧∨() ]*$/; // Letras, símbolos permitidos y paréntesis
     const input = event.target.value;
   
-    // Elimina cualquier carácter no permitido
+    // Validar que todas las variables sean de una sola letra
+    const variables = input.match(/[A-Za-z]/g);
+    if (variables && variables.some(variable => variable.length > 1)) {
+      alert("Solo se permiten variables de una sola letra.");
+      event.target.value = input.replace(/[A-Za-z]+/g, match => match.length > 1 ? "" : match);
+      return;
+    }
+  
+    // Validar caracteres no permitidos
     if (!allowedCharacters.test(input)) {
       event.target.value = input.replace(/[^A-Za-z¬∧∨() ]/g, '');
       alert("Solo se permiten letras, los símbolos ¬∧∨ y los paréntesis.");
     }
   }
+  
   
 
   function loadCSV(event) {
