@@ -142,6 +142,81 @@
 
 <p> Errores cononcidos </p>
 
+<ul>
+  <li>
+    El circulo de navegación aveces se pone por debajo de secciones
+  </li>
+  <li>
+    No se carga correctamente la seccion de simulacion de salida en caso de usar un .csv
+  </li>
+</ul>
+
+<p> En esta aplicacion se cuenta con validacion de datos, en el siguiente cuadro de texto se muestra la funcion de validacion</p>
+
+<pre>
+  function validateExpressionInput(event) {
+    const allowedCharacters = /^[A-Za-z¬∧∨() ]*$/; // Letras, símbolos permitidos y paréntesis
+    const input = event.target.value;
+  
+    // Validar que todas las variables sean de una sola letra
+    const variables = input.match(/[A-Za-z]/g);
+    if (variables && variables.some(variable => variable.length > 1)) {
+      alert("Solo se permiten variables de una sola letra.");
+      event.target.value = input.replace(/[A-Za-z]+/g, match => match.length > 1 ? "" : match);
+      return;
+    }
+  
+    // Validar caracteres no permitidos
+    if (!allowedCharacters.test(input)) {
+      event.target.value = input.replace(/[^A-Za-z¬∧∨() ]/g, '');
+      alert("Solo se permiten letras, los símbolos ¬∧∨ y los paréntesis.");
+    }
+  }
+</pre>
+
 ## Manual de usuario
 
+<p> Para facilitar el uso de LogicS, presentamos el siguiente manual</p>
 
+### Actores
+
+<p> En logics unicamente existe el actor "usuario", este es el encargado de manejar todo el sistema LogicS </p>
+
+### Uso de expresiones
+
+<p> 
+  LogicS ha sido creado para fabricar circuitos logicos con base en expresiones logicas, sin embargo, como podemos asegurar que la aplicación tendra 
+  el resultado obtenido; para esto sigue las instrucciones de construccón de expresiones que se presentan a continuación.
+</p>
+
+<ul>
+  <li>
+    Variables
+  </li>
+  <li>
+    Uso de simbolos logicos
+  </li>
+  <li>
+    Uso de palabras como conector
+  </li>
+  <li>
+    Parentesis
+  </li>
+  <li>
+    CSV
+  </li>
+</ul>
+
+### Variables
+
+<p>
+  Las variables en el simulador, unicamente pueden ser escritas con letras, la construccion del diagrama no dependera de la longitud de la variable sin embargo, la generación de un resultado simulado y de la tabla de verdad será fallida lanzando un mensaje de error por 
+  lo que unicamente se deben usar variables de 1 caracter de longitud si se desea obtener todas las funciones de LogicS.
+</p>
+
+### Uso de simbolos logicos
+
+<p>
+  El uso de simbolos logicos es compatible en la caja de texto, el simulador funcionara correctamente si se colocan los simbolos ∨, ∧, ¬ ;cabe resaltar que para el uso de "¬", este simbolo se debe colocar antes de la variable, por ejemplo "¬A". Los simbolos se pueden 
+  colocar para mayor facilidad de los usuarios con los botones de ayuda debajo de la caja de texto.
+</p>
