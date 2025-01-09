@@ -138,6 +138,61 @@ body {
     color: #7d839c;
 }
 
+/*Instrucciones*/
+
+.ayuda{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin: 50px 0px;
+}
+
+.ayuda h3{
+    font-family: "Hammersmith One", serif;
+    text-align: center;
+    font-size: 22px;
+}
+
+.ayuda div{
+    width: 70%;
+    font-family: "Glory", serif;
+    text-align: center;
+    font-size: 16px;
+}
+
+.ayuda p{
+    width: 70%;
+    font-family: "Hammersmith One", serif;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 50;
+}
+
+.log{
+    color: #0078d7;
+    animation: colorChange 5s linear infinite; 
+    font-size: 16px;
+    font-family: "Hammersmith One", serif;
+}
+
+.ayuda .help{
+    width: 150px;
+    background: white;
+    color: #131835;
+    padding: 10px;
+    border-radius: 20px;
+    transition: all 0.4s;
+    font-family: "Hammersmith One", serif;
+}
+
+.ayuda .help:hover{
+    background: #131835;
+    color: white;
+}
+
 /*LogicS*/
 
 .logics{
@@ -198,6 +253,25 @@ input[type="text"]:focus {
     color: NONE;
     outline: none;
     text-align: center;
+}
+
+.hello{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.hello i{
+    color: #7289da;
+    font-size: 36px;
+}
+
+.hello h2{
+    margin: 0;
+    font-family: "Hammersmith One", serif;
+    font-size: 36px;
+    margin-bottom: 20px;
 }
 
 .simbolo{
@@ -390,6 +464,10 @@ th{
     background: #ad0b00;
 }
 
+.descargas button:nth-child(3){
+    background: #06822f;
+}
+
 .descargas button:nth-child(1):hover{
     color: #131835;
     background: white;
@@ -398,6 +476,12 @@ th{
 
 .descargas button:nth-child(2):hover{
     color: #ad0b00;
+    background: white;
+    transform: scale(1.1);
+}
+
+.descargas button:nth-child(3):hover{
+    color: #06822f;
     background: white;
     transform: scale(1.1);
 }

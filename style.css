@@ -1178,38 +1178,6 @@ h2 {
     .header .data{
         display: none;
     }
-
-    nav{
-        z-index: 100;
-        position: fixed;
-        top: 12%;
-        right: 47%;
-        cursor: url('./img/mano.png'), auto;
-        transform: rotate(-45deg);
-    }
-
-    .nav-content .toggle-btn{
-        font-size: 30px;
-        z-index: 101;
-         cursor: url('./img/mano.png'), auto;
-        transform: rotate(-45deg);
-        background: linear-gradient(to left, #1A284B, #233D80);
-        color: white;
-    }
-    
-    nav.open .nav-content .toggle-btn{
-        transform: rotate(-135deg);
-    }
-    
-    nav.open .nav-content span{
-        transition: all 1s;
-        transform: rotate(calc(var(--i) * (360deg/8))) translateX(100px);
-    }
-    
-    .nav-content span a{
-        text-decoration: none;
-        transform: rotate(45deg);
-    }
 }
 
 @media (max-width: 600px){

@@ -437,3 +437,26 @@ function insertSymbol(symbol) {
     const input = document.getElementById('expression');
     input.value += symbol;
 }
+
+function downloadTruthTableAsCSV() {
+  const truthTableDiv = document.getElementById("truthTableDiv");
+  if (!truthTableDiv || truthTableDiv.children.length === 0) {
+      alert("No hay tabla de verdad generada para descargar.");
+      return;
+  }
+
+  const rows = truthTableDiv.querySelectorAll("tr");
+  const csvContent = Array.from(rows)
+      .map(row => {
+          const cells = row.querySelectorAll("td, th");
+          return Array.from(cells).map(cell => cell.textContent).join(",");
+      })
+      .join("\n");
+
+  const blob = new Blob([csvContent], { type: "text/csv" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "LogicS_Tabla_De_Verdad.csv";
+  link.click();
+}
+
