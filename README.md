@@ -286,7 +286,5 @@
   Este trabajo fue creado por Nuñez Manrique Cuauhtemoc Emmanuel, todo el diseño, idea y nombre de LogicS pertenecen al creador, puedes encontrar este y  más proyectos en el repositorio de Github del creador
 </p>
 
-![ManLetra](https://github.com/user-attachments/assets/775231de-d287-452c-927e-f3c2c48b8e04)
-
 _Derechos reservados de MGMC | 2025_
 
